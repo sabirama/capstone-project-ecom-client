@@ -1,0 +1,17 @@
+@import "semantic-ui-css/semantic.min.css";
+
+.container {
+  position: relative;
+  align-items: center;
+}
+
+section {
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+ul {
+  list-style: none;
+}

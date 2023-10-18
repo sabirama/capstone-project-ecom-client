@@ -1,0 +1,31 @@
+.form {
+  width: max-content;
+  padding: 2rem;
+  border-radius: 2rem 0 2rem 0;
+  background-color: aliceblue;
+}
+
+.form-submit {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.auth-links {
+  display: flex;
+  justify-content: space-between;
+  width: 200px;
+  padding: 0;
+}
+
+.form-label {
+  width: 100%;
+  text-align: center;
+}
+
+.form-element {
+  padding: 0 1rem;
+}
+
+.form-button {
+  padding: 1rem;
+}
