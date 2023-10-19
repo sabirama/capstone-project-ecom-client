@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Form, Input, Segment } from "semantic-ui-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import Post from "../../../lib/http/post";
 
@@ -15,6 +15,8 @@ const Register = () => {
   const [confirmPassword, setconfirmPassword] = useState("");
   const [getData, setGetData] = useState([]);
   const [remember, setRremember] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
+  const navigate = useNavigate();
 
   function firstnameChange(e) {
     setfirstName(e.target.value);
@@ -52,6 +54,12 @@ const Register = () => {
     setRremember(!remember);
   }
 
+  function reRoute() {
+    if (loggedIn == true) {
+      navigate("/");
+    }
+  }
+
   const postData = {
     first_name: firstname,
     last_name: lastname,
@@ -65,21 +73,29 @@ const Register = () => {
 
   useEffect(() => {}, [remember, getData]);
 
+  useEffect(() => {
+    reRoute();
+    return () => {};
+  }, [loggedIn]);
+
   function post() {
-    console.log(postData);
     Post("register", postData, setGetData).then((e) => {
-      if (e) {
-        console.log(getData);
+      if (e.data.token) {
+        setLoggedIn(true);
         if (remember == true) {
-          localStorage.setItem("token", e.token);
-          localStorage.setItem("user_id", e.user.id);
+          localStorage.setItem("token", e.data.token);
+          localStorage.setItem("user_id", e.data.user.id);
+          console.log(e.user);
+          return e.user;
         } else if (remember == false) {
-          sessionStorage.setItem("token", e.token);
-          sessionStorage.setItem("user_id", e.user.id);
+          sessionStorage.setItem("token", e.data.token);
+          sessionStorage.setItem("user_id", e.data.user.id);
+          console.log(e.user);
+          return e.user;
         }
-      } else {
-        console.log("wrong credentials");
       }
+
+      console.log(e.user);
     });
   }
 

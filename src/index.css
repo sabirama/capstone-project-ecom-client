@@ -2,7 +2,7 @@
   --primary: teal;
   --secondary: steelblue;
   --accent: lightgrey;
-  --light: floralwhite;
+  --light: rgba(255, 250, 240, 0.5);
   --dark: darkslategrey;
 }
 
@@ -33,11 +33,21 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-.ui.menu {
-  margin: 0;
-  width: 100%;
-}
-
 .ui.button {
   margin: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .ui.menu {
+    margin: 1rem 0 1rem 0;
+    width: 100%;
+    background: none;
+  }
+}
+@media screen and (min-width: 768px) {
+  .ui.menu {
+    margin: 0;
+    width: 100%;
+    background: none;
+  }
 }

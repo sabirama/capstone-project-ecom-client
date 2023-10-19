@@ -1,5 +1,6 @@
 import { Routes, Route, Link } from "react-router-dom";
 
+// mapping links to page also able to exlude links by name and add classes to list container and link container
 const LinkMapping = (routes, exclude, ListClass, LinkClass) => {
   const newRoute = routes.filter((route) => {
     return exclude.every((name) => name !== route.name);
@@ -16,6 +17,7 @@ const LinkMapping = (routes, exclude, ListClass, LinkClass) => {
   });
 };
 
+// mapping routes and adding exlusion incase a route will be put to other group or needs passable data
 const RouteMapping = (routes, exclude) => {
   const newRoute = routes.filter((route) => {
     return exclude.every((name) => name !== route.name);
@@ -30,13 +32,14 @@ const RouteMapping = (routes, exclude) => {
   );
 };
 
-const ObjectMapping = (items, display, containerClass) => {
-  return items.map((item, index) => {
-    {
-      <div key={index} className={containerClass}>
-        {display}
-      </div>;
-    }
+// for mapping multiple items into the display
+const ObjectMapping = (objectsToMap, DisplayObject) => {
+  objectsToMap.map((object, index) => {
+    return (
+      <div key={index}>
+        <DisplayObject props={object} />
+      </div>
+    );
   });
 };
 

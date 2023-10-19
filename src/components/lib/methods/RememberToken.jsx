@@ -1,21 +1,12 @@
-import { useEffect } from "react";
-import request from "../../../lib/http/request";
+import request from "../http/request";
 
 const RememberToken = () => {
-  function rememberCheck() {
-    if (localStorage.getItem("token")) {
-      const token = localStorage.getItem("token");
-      sessionStorage.setItem("token", token);
-      request.get(`/user`).then((e) => {
-        console.log(e);
-      });
-    }
+  //check for token in local storage
+  if (localStorage.getItem("token") == true) {
+    const token = localStorage.getItem("token");
+    sessionStorage.setItem("token", token);
+    return request.get("/user");
   }
-
-  useEffect(() => {
-    rememberCheck();
-    console.log("shit");
-  }, []);
 };
 
 export default RememberToken;

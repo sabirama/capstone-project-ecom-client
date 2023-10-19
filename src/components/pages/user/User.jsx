@@ -4,13 +4,16 @@ import userRoutes from "../../lib/routes/pageroutes/userroutes";
 
 const User = () => {
   return (
-    <Segment className="container">
-      <div className="flex">
-        <h1>USER</h1>
-        <ul className="flex"> {LinkMapping(userRoutes, [], "px-1")}</ul>
-      </div>
-      {RouteMapping(userRoutes, [])}
-    </Segment>
+    <>
+      <Segment className="container">
+        <div className="flex">
+          <h1>Account Details</h1>
+          <ul className="flex"> {LinkMapping(userRoutes, [], "px-1")}</ul>
+        </div>
+      </Segment>
+
+      <Segment className="container">{RouteMapping(userRoutes, [])}</Segment>
+    </>
   );
 };
 

@@ -1,10 +1,19 @@
-import { Menu, Input } from "semantic-ui-react";
+import { Menu, Input, Icon } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import "./Header.css";
 
 const Header = () => {
   const [request, setRequest] = useState("");
+  const [visible, setVisible] = useState("hidden");
+
+  function toggleNav() {
+    if (visible == "show") {
+      setVisible("hidden");
+    } else if (visible == "hidden") {
+      setVisible("show");
+    }
+  }
 
   function changeHandler(e) {
     setRequest(e.target.value);
@@ -23,12 +32,16 @@ const Header = () => {
     // eslint-disable-next-line react/prop-types
     sessionStorage.setItem("search", request);
     window.dispatchEvent(new Event("search"));
+    console.log(request);
   }
 
   return (
     <>
+      <button className="nav-button ui" onClick={toggleNav}>
+        <Icon name="bars" />
+      </button>
       <Menu className="container">
-        <Menu.Item as={Link} to="/" className="home links">
+        <Menu.Item as={Link} to="/" className="home links" onClick={toggleNav}>
           Home
         </Menu.Item>
       </Menu>
@@ -41,23 +54,23 @@ const Header = () => {
         </Input>
       </Menu>
 
-      <Menu className="container nav-links">
-        <Menu.Item as={Link} to="/books" className="links">
+      <Menu className={`container nav-links nav-bar ${visible}`}>
+        <Menu.Item as={Link} to="/books" className="links" onClick={toggleNav}>
           Books
         </Menu.Item>
-        <Menu.Item as={Link} to="/about" className="links">
+        <Menu.Item as={Link} to="/about" className="links" onClick={toggleNav}>
           About
         </Menu.Item>
 
-        <Menu.Item as={Link} to="/user/cart" className="links">
+        <Menu.Item as={Link} to="/user/cart" className="links" onClick={toggleNav}>
           Cart
         </Menu.Item>
 
-        <Menu.Item as={Link} to="/user" className="links">
+        <Menu.Item as={Link} to="/user" className="links" onClick={toggleNav}>
           User
         </Menu.Item>
 
-        <Menu.Item as={Link} to="/log-in" className="links">
+        <Menu.Item as={Link} to="/log-in" className="links" onClick={toggleNav}>
           Log-in
         </Menu.Item>
       </Menu>
