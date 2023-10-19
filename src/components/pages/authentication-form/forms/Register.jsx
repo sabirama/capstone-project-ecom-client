@@ -52,8 +52,6 @@ const Register = () => {
     setRremember(!remember);
   }
 
-  useEffect(() => {}, [remember, getData]);
-
   const postData = {
     first_name: firstname,
     last_name: lastname,
@@ -64,6 +62,8 @@ const Register = () => {
     password: password,
     password_confirmation: confirmPassword,
   };
+
+  useEffect(() => {}, [remember, getData]);
 
   function post() {
     console.log(postData);
@@ -77,6 +77,8 @@ const Register = () => {
           sessionStorage.setItem("token", e.token);
           sessionStorage.setItem("user_id", e.user.id);
         }
+      } else {
+        console.log("wrong credentials");
       }
     });
   }

@@ -1,10 +1,5 @@
 @import "semantic-ui-css/semantic.min.css";
 
-.container {
-  position: relative;
-  align-items: center;
-}
-
 section {
   height: 90vh;
   display: flex;
@@ -12,6 +7,96 @@ section {
   align-items: center;
 }
 
+.container {
+  position: relative;
+  display: flex;
+  place-items: center;
+}
+
+/* flex */
+
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.content-center {
+  justify-content: center;
+}
+
 ul {
   list-style: none;
+  padding: 0;
+}
+
+/* margin and padding */
+
+.mt-1 {
+  margin-top: 0.5rem;
+}
+
+.mt-5 {
+  margin-top: 4rem;
+}
+
+.ml-1 {
+  margin-left: 0.5rem;
+}
+.px-1 {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.py-1 {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+/* sizeing */
+.width-100 {
+  width: 100%;
+}
+
+.width-90 {
+  width: 90%;
+}
+
+.width-80 {
+  width: 80%;
+}
+
+/* background color */
+
+.bg-primary {
+  background-color: var(--primary);
+}
+
+.bg-secondary {
+  background-color: var(--secondary);
+}
+
+.bg-accent {
+  background-color: var(--accent);
+}
+
+/* border */
+
+.box-primary {
+  border: solid var(--primary) 2px;
+}
+
+.box-primary {
+  border: solid var(--primary) 2px;
+}
+
+.box-secondary {
+  border: solid var(--secondary) 2px;
+}
+
+.box-accent {
+  border: solid var(--accent) 2px;
 }

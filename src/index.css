@@ -1,7 +1,9 @@
 :root {
   --primary: teal;
   --secondary: steelblue;
-  --accent: grey;
+  --accent: lightgrey;
+  --light: floralwhite;
+  --dark: darkslategrey;
 }
 
 #root {
@@ -20,6 +22,10 @@ button {
   font-family: inherit;
   cursor: pointer;
   transition: border-color 0.25s;
+}
+
+a {
+  display: flex;
 }
 
 button:focus,

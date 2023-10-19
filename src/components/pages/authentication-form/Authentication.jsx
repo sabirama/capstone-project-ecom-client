@@ -4,7 +4,7 @@ import authroute from "../../lib/routes/pageroutes/authroute";
 import "./Authentication.css";
 
 const Authentication = () => {
-  return <>{RouteMapping(authroute, [])}</>;
+  return <div className="mt-5">{RouteMapping(authroute, [])}</div>;
 };
 
 export default Authentication;

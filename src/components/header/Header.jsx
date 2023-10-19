@@ -40,13 +40,21 @@ const Header = () => {
           </button>
         </Input>
       </Menu>
+
       <Menu className="container nav-links">
+        <Menu.Item as={Link} to="/books" className="links">
+          Books
+        </Menu.Item>
         <Menu.Item as={Link} to="/about" className="links">
           About
         </Menu.Item>
 
-        <Menu.Item as={Link} to="/cart" className="links">
+        <Menu.Item as={Link} to="/user/cart" className="links">
           Cart
+        </Menu.Item>
+
+        <Menu.Item as={Link} to="/user" className="links">
+          User
         </Menu.Item>
 
         <Menu.Item as={Link} to="/log-in" className="links">

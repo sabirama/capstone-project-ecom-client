@@ -1,19 +1,21 @@
-.header {
-  justify-content: space-between;
-  display: flex;
-  padding: 1rem 0;
-}
-
-.home {
-  justify-content: center;
-  width: 100%;
-}
-
 .search {
   width: 100%;
   justify-content: flex-end;
 }
 
-.nav-links {
-  justify-content: flex-end;
+@media screen and (min-width: 768px) {
+  .header {
+    justify-content: space-between;
+    display: flex;
+    padding: 1rem 0;
+  }
+
+  .home {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .nav-links {
+    justify-content: flex-end;
+  }
 }

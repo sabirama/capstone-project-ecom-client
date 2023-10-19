@@ -17,7 +17,7 @@ const mainroutes = [
   },
   {
     name: "ABOUT",
-    path: "/about",
+    path: "/about/*",
     element: <About />,
   },
   {
@@ -27,7 +27,7 @@ const mainroutes = [
   },
   {
     name: "USER",
-    path: "/user",
+    path: "/user/*",
     element: <User />,
   },
 ];

@@ -25,6 +25,8 @@ const LogIn = () => {
     password: password,
   };
 
+  useEffect(() => {}, [remember, getData]);
+
   function post() {
     Post("login", postData, setGetData).then((e) => {
       setGetData(e);
@@ -38,6 +40,7 @@ const LogIn = () => {
           sessionStorage.setItem("user_id", e.user.id);
         }
       }
+      console.log("wrong username or password");
     });
   }
 
