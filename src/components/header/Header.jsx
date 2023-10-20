@@ -2,7 +2,7 @@ import { Menu, Input, Icon } from "semantic-ui-react";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import "./Header.css";
-import request from "../lib/http/request";
+import Post from "../lib/http/post";
 
 const Header = () => {
   const [searchRequest, setSearchRequest] = useState("");
@@ -10,6 +10,7 @@ const Header = () => {
   const [loggedIn, setLoggedIn] = useState("link-hidden");
   const [logOutlink, setLogOutLink] = useState("Link-show");
   const navigate = useNavigate();
+  const token = sessionStorage.getItem("token");
 
   function isLoggedIn() {
     if (
@@ -26,13 +27,13 @@ const Header = () => {
   }
 
   async function logOut() {
-    await request.post("logout", "").then(() => {
-      sessionStorage.removeItem("token");
-      localStorage.removeItem("token");
-      setLoggedIn("link-hidden");
+    await Post("logout").then(() => {
+      sessionStorage.clear();
       setLogOutLink("link-show");
-      closeNav();
+      setLoggedIn("link-hidden");
       navigate("/");
+      console.log(token);
+      console.log("log out");
     });
   }
 
@@ -70,20 +71,20 @@ const Header = () => {
   }
 
   useEffect(() => {
+    isLoggedIn();
+  }, []);
+
+  useEffect(() => {
     //listen to event log in
-    window.addEventListener("loggingIn", function () {
+    window.addEventListener("loggedIn", function () {
       setLoggedIn("link-show");
       setLogOutLink("link-hidden");
     });
 
     return () => {
       //Remove the event listener for seesion storage
-      window.removeEventListener("loggingIn", function () {});
+      window.removeEventListener("LoggedIn", function () {});
     };
-  });
-
-  useEffect(() => {
-    isLoggedIn();
   }, []);
 
   return (

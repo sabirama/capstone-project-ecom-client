@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Form, Input, Segment } from "semantic-ui-react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import Post from "../../../lib/http/post";
 
@@ -14,13 +14,8 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setconfirmPassword] = useState("");
   const [getData, setGetData] = useState([]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [remember, setRremember] = useState(false);
-  const [loggedIn, setLoggedIn] = useState(false);
-  const navigate = useNavigate();
-
-  function logIn() {
-    window.dispatchEvent(new Event("loggingIn"));
-  }
 
   function firstnameChange(e) {
     setfirstName(e.target.value);
@@ -58,12 +53,6 @@ const Register = () => {
     setRremember(!remember);
   }
 
-  function reRoute() {
-    if (loggedIn == true) {
-      navigate("/");
-    }
-  }
-
   const postData = {
     first_name: firstname,
     last_name: lastname,
@@ -75,26 +64,30 @@ const Register = () => {
     password_confirmation: confirmPassword,
   };
 
-  function post() {
-    console.log(postData);
-    Post("register", postData, setGetData).then(() => {
-      setLoggedIn(true);
-    });
+  async function logIn() {
+    await post();
+    setIsLoggedIn(true);
+  }
+
+  async function post() {
+    await Post("register", postData, setGetData);
   }
 
   useEffect(() => {
-    if (remember == true) {
-      localStorage.setItem("token", getData.token);
-      localStorage.setItem("username", postData.username);
-      localStorage.setItem("password", postData.password);
-      sessionStorage.setItem("token", getData.token);
-      logIn();
-    } else if (remember == false) {
-      sessionStorage.setItem("token", getData.token);
-      logIn();
+    if (isLoggedIn == true) {
+      if (remember == true) {
+        localStorage.setItem("token", getData.token);
+        sessionStorage.setItem("token", getData.token);
+      } else if (remember == false) {
+        sessionStorage.setItem("token", getData.token);
+      }
+      if (getData.token != null) {
+        window.dispatchEvent(new Event("loggedIn"));
+        window.location.href = "/";
+      }
+      setIsLoggedIn(false);
     }
-    reRoute();
-  }, [loggedIn]);
+  }, [isLoggedIn]);
 
   return (
     <Segment>
@@ -158,7 +151,7 @@ const Register = () => {
             <input type="checkbox" onChange={rememberMe} />
             <span>Remember me</span>
           </span>
-          <button className="form-button form-element" onClick={post}>
+          <button className="form-button form-element" onClick={logIn}>
             Register
           </button>
         </Form.Group>
