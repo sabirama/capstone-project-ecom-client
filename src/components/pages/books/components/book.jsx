@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Grid } from "semantic-ui-react";
 
-const book = (prop) => {
+const Book = (prop) => {
   return (
     <>
       <Grid.Column className="container book">
@@ -15,4 +15,4 @@ const book = (prop) => {
   );
 };
 
-export default book;
+export default Book;
