@@ -17,7 +17,7 @@ section {
 /* flex */
 
 .flex {
-  display: flex;
+  display: flex !important;
 }
 
 .flex-col {
@@ -30,13 +30,18 @@ section {
 }
 
 .content-center {
-  justify-content: center;
+  justify-content: center !important;
+}
+.content-space-between {
+  justify-content: space-between !important;
 }
 
 ul {
   list-style: none;
   padding: 0;
 }
+
+/* gap */
 
 /* margin and padding */
 .m-1 {

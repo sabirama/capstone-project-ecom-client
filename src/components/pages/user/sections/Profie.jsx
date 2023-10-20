@@ -31,6 +31,7 @@ const Profie = () => {
         <Segment>
           <h4>{user.first_name}</h4>
           <h4>{user.last_name}</h4>
+          <h4>{user.email}</h4>
         </Segment>
       </Header>
     </>

@@ -22,7 +22,7 @@ const mainroutes = [
   },
   {
     name: "BOOKS",
-    path: "/books",
+    path: "/books/*",
     element: <Books />,
   },
   {

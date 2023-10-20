@@ -1,3 +1,26 @@
+.book {
+  display: flex;
+  border: 1px solid rgb(175, 175, 175);
+  padding: 1rem 0;
+}
+
+.book-link {
+  flex-direction: column;
+  color: black;
+  margin: 1rem;
+  position: relative;
+}
+
+.book-row {
+  margin: 0 1rem !important;
+  flex-wrap: wrap;
+}
+
+.book-image {
+  position: absolute;
+  width: 100%;
+}
+
 @media screen and (min-width: 768px) {
   .check-group {
     display: flex;

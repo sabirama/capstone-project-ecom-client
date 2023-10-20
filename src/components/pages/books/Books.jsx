@@ -1,9 +1,11 @@
 import { Segment } from "semantic-ui-react";
+import { Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
-
-import Book from "./components/book";
+import { RouteMapping } from "../../lib/methods/mapping";
 import Get from "../../lib/http/get";
+import IndividualBook from "./sections/IndividualBook";
 import "./Books.css";
+import BooksGrid from "./sections/BooksGrid";
 
 const Books = () => {
   const [books, setBooks] = useState([]);
@@ -15,6 +17,13 @@ const Books = () => {
     setPageLinks(data.meta.links);
     setBooks(data.data);
   }
+
+  const bookRoutes = books.map((book) => {
+    return {
+      path: book.title,
+      element: <IndividualBook book={book} />,
+    };
+  });
 
   useEffect(() => {
     getBooks();
@@ -52,9 +61,10 @@ const Books = () => {
       </Segment>
 
       <Segment>
-        {books.map((book, index) => {
-          return <Book key={index} book={book} />;
-        })}
+        <Routes>
+          <Route path="" element={<BooksGrid books={books} />} />
+        </Routes>
+        {RouteMapping(bookRoutes, [])}
       </Segment>
     </div>
   );
