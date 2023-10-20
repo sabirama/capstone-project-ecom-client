@@ -36,6 +36,9 @@ button:focus-visible {
 .ui.button {
   margin: 0;
 }
+.ui.segment {
+  width: 100% !important;
+}
 
 @media screen and (max-width: 768px) {
   .ui.menu {
