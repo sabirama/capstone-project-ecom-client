@@ -3,12 +3,11 @@ import mainroutes from "./components/lib/routes/mainroutes";
 
 import Header from "./components/header/Header";
 import Footer from "./components/footer/Footer";
-import RememberToken from "./components/lib/methods/rememberToken";
 import "./App.css";
+import RememberToken from "./components/lib/methods/rememberToken";
 
 function App() {
   RememberToken();
-  console.log(RememberToken());
 
   return (
     <>

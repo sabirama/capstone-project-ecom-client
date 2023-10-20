@@ -18,6 +18,10 @@ const Register = () => {
   const [loggedIn, setLoggedIn] = useState(false);
   const navigate = useNavigate();
 
+  function logIn() {
+    window.dispatchEvent(new Event("loggingIn"));
+  }
+
   function firstnameChange(e) {
     setfirstName(e.target.value);
   }
@@ -71,33 +75,26 @@ const Register = () => {
     password_confirmation: confirmPassword,
   };
 
-  useEffect(() => {}, [remember, getData]);
-
-  useEffect(() => {
-    reRoute();
-    return () => {};
-  }, [loggedIn]);
-
   function post() {
-    Post("register", postData, setGetData).then((e) => {
-      if (e.data.token) {
-        setLoggedIn(true);
-        if (remember == true) {
-          localStorage.setItem("token", e.data.token);
-          localStorage.setItem("user_id", e.data.user.id);
-          console.log(e.user);
-          return e.user;
-        } else if (remember == false) {
-          sessionStorage.setItem("token", e.data.token);
-          sessionStorage.setItem("user_id", e.data.user.id);
-          console.log(e.user);
-          return e.user;
-        }
-      }
-
-      console.log(e.user);
+    console.log(postData);
+    Post("register", postData, setGetData).then(() => {
+      setLoggedIn(true);
     });
   }
+
+  useEffect(() => {
+    if (remember == true) {
+      localStorage.setItem("token", getData.token);
+      localStorage.setItem("username", postData.username);
+      localStorage.setItem("password", postData.password);
+      sessionStorage.setItem("token", getData.token);
+      logIn();
+    } else if (remember == false) {
+      sessionStorage.setItem("token", getData.token);
+      logIn();
+    }
+    reRoute();
+  }, [loggedIn]);
 
   return (
     <Segment>

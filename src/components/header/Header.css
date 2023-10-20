@@ -2,6 +2,14 @@
   width: 100%;
   justify-content: flex-end;
 }
+.link-hidden {
+  display: none !important;
+}
+
+.link-show {
+  display: block;
+}
+
 @media screen and (max-width: 768px) {
   .ui.nav-bar {
     display: flex;
@@ -34,7 +42,7 @@
     min-width: 90vw !important;
     right: -100vw;
     top: 4rem;
-    transition-duration: 2s;
+    transition-duration: 1s;
     background-color: var(--light) !important;
   }
 
@@ -43,7 +51,7 @@
     min-width: 90vw !important;
     right: 0;
     top: 4rem;
-    transition-duration: 2s;
+    transition-duration: 1s;
     z-index: 2;
     background-color: var(--light) !important;
   }

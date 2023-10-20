@@ -1,22 +1,26 @@
 import { useEffect, useState } from "react";
 import { Header, Icon, Segment } from "semantic-ui-react";
 import Get from "../../../lib/http/get";
+import { useNavigate } from "react-router-dom";
 const Profie = () => {
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState([]);
+  const navigate = useNavigate();
 
   async function getUser() {
-    const { data } = await Get("user");
-    setUser(data.user);
+    try {
+      const { data } = await Get("user");
+      setUser(data.user);
+    } catch {
+      console.log("Error getting user");
+      navigate("/");
+    }
   }
 
   useEffect(() => {
     getUser();
   }, []);
 
-  useEffect(() => {
-    console.log(user);
-    console.log(user.id);
-  }, [user]);
+  useEffect(() => {}, [user]);
 
   return (
     <>

@@ -13,7 +13,7 @@ const Search = (setter) => {
       //Remove the event listener for seesion storage
       window.removeEventListener("search", function () {});
     };
-  }, [setter]); // The empty dependency array ensures it runs only once on mount
+  }, []); // The empty dependency array ensures it runs only once on mount
 };
 
 export default Search;

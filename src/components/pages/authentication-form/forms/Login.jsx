@@ -11,6 +11,10 @@ const LogIn = () => {
   const [loggedIn, setLoggedIn] = useState(false);
   const navigate = useNavigate();
 
+  function logIn() {
+    window.dispatchEvent(new Event("loggingIn"));
+  }
+
   function userChange(e) {
     setUsername(e.target.value);
   }
@@ -33,29 +37,24 @@ const LogIn = () => {
     password: password,
   };
 
-  useEffect(() => {}, [remember, getData]);
-
   function post() {
-    Post("login", postData, setGetData).then((e) => {
-      console.log(e.data);
+    console.log(postData);
+    Post("login", postData, setGetData).then(() => {
       setLoggedIn(true);
-      if (remember == true) {
-        localStorage.setItem("token", e.data.token);
-        localStorage.setItem("user_id", e.data.user.id);
-        console.log(e.user);
-        return e.user;
-      } else if (remember == false) {
-        sessionStorage.setItem("token", e.data.token);
-        sessionStorage.setItem("user_id", e.data.user.id);
-        console.log(e.user);
-
-        return e.user;
-      }
-
-      console.log("error");
     });
   }
+
   useEffect(() => {
+    if (remember == true) {
+      localStorage.setItem("token", getData.token);
+      localStorage.setItem("username", postData.username);
+      localStorage.setItem("password", postData.password);
+      sessionStorage.setItem("token", getData.token);
+      logIn();
+    } else if (remember == false) {
+      sessionStorage.setItem("token", getData.token);
+      logIn();
+    }
     reRoute();
   }, [loggedIn]);
 
@@ -64,7 +63,7 @@ const LogIn = () => {
       <h1>Log In</h1>
 
       <Form className="form log-in">
-        <Form.Field control={Input} label="Username" placeholder="Create a username" onChange={userChange} />
+        <Form.Field control={Input} label="Username" placeholder="Username" onChange={userChange} />
 
         <Form.Field
           control={Input}

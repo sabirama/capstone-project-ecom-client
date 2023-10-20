@@ -1,11 +1,40 @@
 import { Menu, Input, Icon } from "semantic-ui-react";
-import { Link } from "react-router-dom";
-import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 import "./Header.css";
+import request from "../lib/http/request";
 
 const Header = () => {
-  const [request, setRequest] = useState("");
+  const [searchRequest, setSearchRequest] = useState("");
   const [visible, setVisible] = useState("hidden");
+  const [loggedIn, setLoggedIn] = useState("link-hidden");
+  const [logOutlink, setLogOutLink] = useState("Link-show");
+  const navigate = useNavigate();
+
+  function isLoggedIn() {
+    if (
+      sessionStorage.getItem("token") == null ||
+      sessionStorage.getItem("token") == "null" ||
+      sessionStorage.getItem("token") == "undefined"
+    ) {
+      setLoggedIn("link-hidden");
+      setLogOutLink("link-show");
+    } else {
+      setLoggedIn("link-show");
+      setLogOutLink("link-hidden");
+    }
+  }
+
+  async function logOut() {
+    await request.post("logout", "").then(() => {
+      sessionStorage.removeItem("token");
+      localStorage.removeItem("token");
+      setLoggedIn("link-hidden");
+      setLogOutLink("link-show");
+      closeNav();
+      navigate("/");
+    });
+  }
 
   function toggleNav() {
     if (visible == "show") {
@@ -15,25 +44,47 @@ const Header = () => {
     }
   }
 
+  function closeNav() {
+    setVisible("hidden");
+  }
+
+  //search bar value handler
   function changeHandler(e) {
-    setRequest(e.target.value);
+    setSearchRequest(e.target.value);
   }
 
   //adding event trigger on enter
   // eslint-disable-next-line no-unused-vars
   const handleKeyPress = (e) => {
     if (e.key === "Enter") {
-      setRequest(e.target.value);
+      setSearchRequest(e.target.value);
     }
   };
 
   //store data to session storage for other object element to use
   function sendData() {
     // eslint-disable-next-line react/prop-types
-    sessionStorage.setItem("search", request);
+    sessionStorage.setItem("search", searchRequest);
     window.dispatchEvent(new Event("search"));
-    console.log(request);
+    console.log(searchRequest);
   }
+
+  useEffect(() => {
+    //listen to event log in
+    window.addEventListener("loggingIn", function () {
+      setLoggedIn("link-show");
+      setLogOutLink("link-hidden");
+    });
+
+    return () => {
+      //Remove the event listener for seesion storage
+      window.removeEventListener("loggingIn", function () {});
+    };
+  });
+
+  useEffect(() => {
+    isLoggedIn();
+  }, []);
 
   return (
     <>
@@ -41,7 +92,7 @@ const Header = () => {
         <Icon name="bars" />
       </button>
       <Menu className="container">
-        <Menu.Item as={Link} to="/" className="home links" onClick={toggleNav}>
+        <Menu.Item as={Link} to="/" className="home links" onClick={closeNav}>
           Home
         </Menu.Item>
       </Menu>
@@ -55,23 +106,26 @@ const Header = () => {
       </Menu>
 
       <Menu className={`container nav-links nav-bar ${visible}`}>
-        <Menu.Item as={Link} to="/books" className="links" onClick={toggleNav}>
+        <Menu.Item as={Link} to="/books" className="links" onClick={closeNav}>
           Books
         </Menu.Item>
-        <Menu.Item as={Link} to="/about" className="links" onClick={toggleNav}>
+        <Menu.Item as={Link} to="/about" className="links" onClick={closeNav}>
           About
         </Menu.Item>
 
-        <Menu.Item as={Link} to="/user/cart" className="links" onClick={toggleNav}>
+        <Menu.Item as={Link} to="/user/cart" className={`links ${loggedIn}`} onClick={closeNav}>
           Cart
         </Menu.Item>
 
-        <Menu.Item as={Link} to="/user" className="links" onClick={toggleNav}>
+        <Menu.Item as={Link} to="/user" className={`links ${loggedIn}`} onClick={closeNav}>
           User
         </Menu.Item>
 
-        <Menu.Item as={Link} to="/log-in" className="links" onClick={toggleNav}>
+        <Menu.Item as={Link} to="/log-in" className={`links ${logOutlink}`} onClick={closeNav}>
           Log-in
+        </Menu.Item>
+        <Menu.Item as={Link} className={`links ${loggedIn}`} onClick={logOut}>
+          Log-out
         </Menu.Item>
       </Menu>
     </>

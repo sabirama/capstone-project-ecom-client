@@ -1,12 +1,16 @@
-import request from "../http/request";
-
 const RememberToken = () => {
   //check for token in local storage
-  if (localStorage.getItem("token") == true) {
-    const token = localStorage.getItem("token");
-    sessionStorage.setItem("token", token);
-    return request.get("/user");
+  const token = localStorage.getItem("token");
+  if (token != null || token != "null" || token != "undefined") {
+    try {
+      sessionStorage.setItem("token", token);
+    } catch {
+      console.log("token does not exist");
+      // navigate("/");
+    }
   }
+  console.log(token);
+  console.log(sessionStorage.getItem(token));
 };
 
 export default RememberToken;
