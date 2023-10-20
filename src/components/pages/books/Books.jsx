@@ -1,10 +1,11 @@
-import { Routes, Route } from "react-router-dom";
+// import { Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { RouteMapping } from "../../lib/methods/mapping";
-import Get from "../../lib/http/get";
 import IndividualBook from "./sections/IndividualBook";
+// import BooksGrid from "./sections/BooksGrid";
+import Get from "../../lib/http/get";
+
 import "./Books.css";
-import BooksGrid from "./sections/BooksGrid";
 
 const Books = () => {
   const [books, setBooks] = useState([]);
@@ -36,9 +37,9 @@ const Books = () => {
   return (
     <div>
       <>
-        <Routes>
+        {/* <Routes>
           <Route path="" element={<BooksGrid books={books} />} />
-        </Routes>
+        </Routes> */}
         {RouteMapping(bookRoutes, [])}
       </>
     </div>
