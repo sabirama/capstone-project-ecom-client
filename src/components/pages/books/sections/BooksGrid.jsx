@@ -1,5 +1,5 @@
 import { Grid, Segment } from "semantic-ui-react";
-// import Book from "../components/Book";
+import Book from "../components/Book";
 
 const BooksGrid = (prop) => {
   return (
@@ -30,9 +30,9 @@ const BooksGrid = (prop) => {
       <Segment>
         <Grid stackable columns={2}>
           <Grid.Row className="book-row">
-            {/* {prop.books.map((book, index) => {
+            {prop.books.map((book, index) => {
               return <Book key={index} book={book} />;
-            })} */}
+            })}
           </Grid.Row>
         </Grid>
       </Segment>
