@@ -7,7 +7,7 @@ import Authentication from "../../pages/authentication-form/Authentication";
 const mainroutes = [
   {
     name: "HOME",
-    path: "/",
+    path: "/*",
     element: <Home />,
   },
   {

@@ -32,15 +32,4 @@ const RouteMapping = (routes, exclude) => {
   );
 };
 
-// for mapping multiple items into the display
-const ObjectMapping = (objectsToMap, DisplayObject) => {
-  objectsToMap.map((object, index) => {
-    return (
-      <div key={index}>
-        <DisplayObject props={object} />
-      </div>
-    );
-  });
-};
-
-export { LinkMapping, RouteMapping, ObjectMapping };
+export { LinkMapping, RouteMapping };

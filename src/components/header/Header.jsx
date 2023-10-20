@@ -94,7 +94,7 @@ const Header = () => {
       </button>
       <Menu className="container">
         <Menu.Item as={Link} to="/" className="home links" onClick={closeNav}>
-          Home
+          <Icon name="home" />
         </Menu.Item>
       </Menu>
       <Menu>
@@ -108,17 +108,21 @@ const Header = () => {
 
       <Menu className={`container nav-links nav-bar ${visible}`}>
         <Menu.Item as={Link} to="/books" className="links" onClick={closeNav}>
+          <Icon name="leanpub" />
           Books
         </Menu.Item>
         <Menu.Item as={Link} to="/about" className="links" onClick={closeNav}>
+          <Icon name="info" />
           About
         </Menu.Item>
 
         <Menu.Item as={Link} to="/user/cart" className={`links ${loggedIn}`} onClick={closeNav}>
+          <Icon name="cart" />
           Cart
         </Menu.Item>
 
         <Menu.Item as={Link} to="/user" className={`links ${loggedIn}`} onClick={closeNav}>
+          <Icon name="user circle outline" />
           User
         </Menu.Item>
 

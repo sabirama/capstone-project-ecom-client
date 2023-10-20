@@ -1,0 +1,22 @@
+@media screen and (max-width: 768px) {
+  .hero-img {
+    width: 100%;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .hero-img {
+    width: 50%;
+    padding: 4rem 0;
+  }
+}
+
+.hero-button {
+  background-color: var(--accent);
+  padding: 1rem;
+  border-radius: 0.5rem;
+}
+
+.overflow-x-auto {
+  overflow-x: auto;
+}

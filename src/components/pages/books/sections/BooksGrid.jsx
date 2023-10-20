@@ -1,5 +1,5 @@
 import { Grid, Segment } from "semantic-ui-react";
-import Book from "../components/Book";
+import Book from "../components/book";
 
 const BooksGrid = (prop) => {
   return (
