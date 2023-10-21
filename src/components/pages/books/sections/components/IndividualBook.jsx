@@ -1,6 +1,12 @@
+import { useEffect } from "react";
 import { Segment, Menu } from "semantic-ui-react";
 
 const IndividualBook = (prop) => {
+  
+  useEffect(() => {
+    console.log(prop.book);
+  }, []);
+
   return (
     <>
       <Segment className="p-1 container width-100">
@@ -13,7 +19,6 @@ const IndividualBook = (prop) => {
           <p>{prop.book.title}</p>
         </div>
       </Segment>
-      <Segment></Segment>
       <Segment>
         <Menu className="flex content-space-between">
           <Menu.Item>BUY NOW</Menu.Item>

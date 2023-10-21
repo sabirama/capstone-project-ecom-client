@@ -1,22 +1,29 @@
 import { Link } from "react-router-dom";
 
-const Pagination = (pages, prefix, pagesetter) => {
+const Pagination = (pages, prefix, pageSetter) => {
+  function setPage(e) {
+    pageSetter(e.target.name);
+  }
   return (
     <div className="container flex">
       {pages.map((page, index) => {
         if (index == 0) {
           return (
-            <Link key={index} to={`/${prefix}`}>
+            <Link key={index} to={`/${prefix}`} name={index} onClick={setPage} className="pagination-link box-accent">
               1
             </Link>
           );
         } else {
           return (
-            <div key={index}>
-              <Link to={`/${prefix}/${index + 1}`} value={index} onClick={pagesetter}>
-                {index + 1}
-              </Link>
-            </div>
+            <Link
+              key={index}
+              to={`/${prefix}/${index + 1}`}
+              name={index}
+              onClick={setPage}
+              className="pagination-link box-accent"
+            >
+              {index + 1}
+            </Link>
           );
         }
       })}

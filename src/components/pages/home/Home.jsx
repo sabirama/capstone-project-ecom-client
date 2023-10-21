@@ -4,7 +4,7 @@ import { RouteMapping } from "../../lib/methods/mapping";
 import { Routes, Route } from "react-router-dom";
 import MainPage from "./components/MainPage";
 import request from "../../lib/http/request";
-import IndividualBook from "../books/sections/IndividualBook";
+import IndividualBook from "../books/sections/components/IndividualBook";
 import "./Home.css";
 
 const Home = () => {
