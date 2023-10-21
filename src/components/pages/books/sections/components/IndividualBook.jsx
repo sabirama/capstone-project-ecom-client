@@ -13,10 +13,7 @@ const IndividualBook = (prop) => {
   }
 
   useEffect(() => {
-    window.addEventListener("newState", () => {
-      getReviews();
-    });
-    return window.removeEventListener("newState", console.log("removed event"));
+    getReviews();
   }, [prop]);
 
   return (
