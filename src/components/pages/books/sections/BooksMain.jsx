@@ -1,7 +1,7 @@
 import { Grid, Segment } from "semantic-ui-react";
 import Book from "../components/book";
 
-const BooksGrid = (prop) => {
+const BooksMain = (prop) => {
   return (
     <>
       <Segment className="container">
@@ -28,7 +28,7 @@ const BooksGrid = (prop) => {
         </div>
       </Segment>
       <Segment>
-        <Grid stackable columns={2}>
+        <Grid stackable columns={4}>
           <Grid.Row className="book-row">
             {prop.books.map((book, index) => {
               return <Book key={index} book={book} />;
@@ -40,4 +40,4 @@ const BooksGrid = (prop) => {
   );
 };
 
-export default BooksGrid;
+export default BooksMain;

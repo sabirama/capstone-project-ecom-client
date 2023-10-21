@@ -10,8 +10,8 @@ const MainPage = (props) => {
     <>
       <Segment className="container">
         <img src="logo.svg" className="hero-img" />
-        <div className="container box-accent flex-col place-center width-70">
-          <h3>Literature's Finest Selection Awaits You!</h3>
+        <div className="container flex-col place-center width-70 action-container">
+          <h1>Literature's Finest Selection Awaits You!</h1>
           <h4>Browse through our collection.</h4>
           <Link to="books" className="hero-button">
             Explore Our Collection

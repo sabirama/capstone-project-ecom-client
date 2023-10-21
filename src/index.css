@@ -40,6 +40,10 @@ button:focus-visible {
   width: 100% !important;
 }
 
+.ui.pagination.menu {
+  justify-content: center;
+}
+
 @media screen and (max-width: 768px) {
   .ui.menu {
     margin: 1rem 0 1rem 0;

@@ -1,3 +1,9 @@
+@media screen and (max-width: 900px) {
+  .book {
+    width: 33% !important;
+  }
+}
+
 .book {
   display: flex;
   padding: 1rem 0;
@@ -6,16 +12,16 @@
 .book-link {
   flex-direction: column;
   color: black;
-  border: solid black 1px;
+  border: solid var(--accent) 1px;
   margin: 1rem;
   padding: 1rem;
   position: relative;
-  min-width: 250px;
+  min-width: 180px;
 }
 
 .book-row {
   margin: 0 1rem !important;
-  flex-wrap: wrap;
+  box-sizing: inherit;
 }
 
 .book-image {

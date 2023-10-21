@@ -1,6 +1,22 @@
+.action-container h1 {
+  margin: 1rem !important;
+  text-align: center;
+  font-size: 36px;
+}
+
 @media screen and (max-width: 768px) {
   .hero-img {
     width: 100%;
+  }
+
+  .action-container {
+    margin: auto;
+    width: 90% !important;
+    padding: 1rem !important;
+  }
+
+  .action-container a {
+    margin: 1rem !important;
   }
 }
 
