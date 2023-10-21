@@ -66,7 +66,7 @@ const Books = () => {
           </Routes>
         </>
       </div>
-      <Segment>{Pagination(pages, "books", setPageValue)}</Segment>
+      <Segment>{Pagination(pages, "books/*", setPageValue)}</Segment>
     </>
   );
 };

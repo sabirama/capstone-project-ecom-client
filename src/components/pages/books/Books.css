@@ -33,4 +33,13 @@
   .check-group {
     display: flex;
   }
+
+  .button-container {
+    margin: 0 !important;
+    justify-content: flex-end;
+  }
+
+  .button {
+    margin: 0 1rem;
+  }
 }

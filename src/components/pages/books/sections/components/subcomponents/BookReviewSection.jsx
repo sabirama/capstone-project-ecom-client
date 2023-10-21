@@ -4,8 +4,10 @@ const BookReviewSection = (prop) => {
   return (
     <Segment>
       <div>
-        <h3>{prop.review.user_id}</h3>
-        <p>{prop.review.body}</p>
+        <h3>
+          {prop.user[0].first_name} {prop.user[0].last_name}
+        </h3>
+        <p>{prop.review[0].body}</p>
       </div>
     </Segment>
   );

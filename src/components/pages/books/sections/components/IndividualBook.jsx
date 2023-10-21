@@ -8,15 +8,15 @@ const IndividualBook = (prop) => {
   const [reviews, setReviews] = useState([]);
 
   async function getReviews() {
-    const { data } = await Get(`book-reviews/user?user_id=13`);
-    setReviews(data.book_reviews.data);
+    const { data } = await Get(`book-reviews/book?book_id=${prop.book.id}`);
+    setReviews(data.book_reviews);
   }
   useEffect(() => {
     getReviews();
   }, []);
 
   useEffect(() => {
-    console.log(reviews);
+    
   }, [reviews]);
 
   return (
@@ -31,16 +31,33 @@ const IndividualBook = (prop) => {
           <p>{prop.book.title}</p>
         </div>
       </Segment>
-      <Segment>
-        <Menu className="flex content-space-between">
-          <Menu.Item>BUY NOW</Menu.Item>
-          <Menu.Item>ADD TO CART</Menu.Item>
-        </Menu>
-      </Segment>
+
+      <Menu className="flex content-space-between">
+        <Menu.Item>
+          <button className="button">BUY NOW</button>
+        </Menu.Item>
+
+        <Menu.Item>
+          <button className="button">ADD TO CART</button>
+        </Menu.Item>
+
+        <Segment className="container button-container">
+          <button className="button">Rate</button>
+          <button className="button">Add to favorites</button>
+        </Segment>
+      </Menu>
 
       <Segment>
+        <Segment>
+          <h2>Reviews</h2>
+        </Segment>
+
         {reviews.map((review, index) => {
-          return <BookReviewSection key={index} review={review} />;
+          return (
+            <div key={index} className="container py-1">
+              <BookReviewSection review={review.book_reviews} user={review.user} />
+            </div>
+          );
         })}
       </Segment>
 
