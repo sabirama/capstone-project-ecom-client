@@ -16,17 +16,30 @@ const IndividualBook = (prop) => {
     getReviews();
   }, [prop]);
 
+  useEffect(() => {
+    window.addEventListener("addedBookReview", () => {
+      getReviews();
+      console.log("event caught");
+    });
+    return () => {
+      window.removeEventListener("addedBookReview", () => {
+        console.log("event removed");
+      });
+    };
+  }, []);
+
   return (
     <>
-      <Segment className="p-1 container width-100">
-        <div className="py-1">
-          <h1> TITLE</h1>
-          <h2>{prop.book.title}</h2>
-        </div>
-        <div className="py-1">
-          <h2>Details</h2>
+      <Segment className="p-1 container flex-col width-100">
+        <img src="" alt="book cover" />
+        <Segment className="py-1">
+          <h1>{prop.book.title}</h1>
+          <p>Written by: {prop.book.book_details.author.pen_name}</p>
+        </Segment>
+        <Segment className="py-1">
+          <h3>Details</h3>
           <p>{prop.book.title}</p>
-        </div>
+        </Segment>
       </Segment>
 
       <Menu className="flex content-space-between">
@@ -39,7 +52,6 @@ const IndividualBook = (prop) => {
         </Menu.Item>
 
         <Segment className="container button-container">
-          <button className="button">Rate</button>
           <button className="button">Add to favorites</button>
         </Segment>
       </Menu>

@@ -1,11 +1,12 @@
 import { Form } from "semantic-ui-react";
 
 import Post from "../../../../../lib/http/post";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const CreateBookReview = (prop) => {
   const [reviewBody, setReviewBody] = useState("");
-  const [rate, setRate] = useState(1);
+  const [review, setReview] = useState("");
+  const [rate, setRate] = useState(null);
   const userId = sessionStorage.getItem("user_id");
 
   function bodyChange(e) {
@@ -15,8 +16,10 @@ const CreateBookReview = (prop) => {
   function createRate(e) {
     setRate(e.target.value);
   }
+
   async function postReview() {
-    await Post("/book-reviews", postData);
+    await Post("/book-reviews", postData, setReview);
+    console.log(review);
   }
 
   const postData = {
@@ -25,6 +28,14 @@ const CreateBookReview = (prop) => {
     body: reviewBody,
     rate: rate,
   };
+
+  function logger() {
+    console.log(postData);
+  }
+
+  useEffect(() => {
+    window.dispatchEvent(new Event("addedBookReview"));
+  }, [review]);
 
   return (
     <>
@@ -39,6 +50,9 @@ const CreateBookReview = (prop) => {
         </div>
         <button onClick={postReview} className="button">
           Test
+        </button>
+        <button onClick={logger} className="button">
+          CONSOLE LOG
         </button>
       </Form>
     </>

@@ -6,7 +6,7 @@ const Post = async function (query, formData, setter) {
     setter(data);
     return { data };
   } catch (e) {
-    return console.log(e);
+    return "Error Fetching Data";
   }
 };
 
