@@ -23,7 +23,7 @@ const Books = () => {
 
   const bookRoutes = books.map((book) => {
     return {
-      path: `*page/${book.id}`,
+      path: `id/${book.id}`,
       element: <IndividualBook book={book} />,
     };
   });

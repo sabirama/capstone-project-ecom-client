@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Segment, Menu } from "semantic-ui-react";
 import BookReviewSection from "./subcomponents/BookReviewSection";
 import Get from "../../../../lib/http/get";
-import CreateReview from "./subcomponents/CreateReview";
+import CreateReview from "./subcomponents/CreateBookReview";
 
 const IndividualBook = (prop) => {
   const [reviews, setReviews] = useState([]);
@@ -11,13 +11,13 @@ const IndividualBook = (prop) => {
     const { data } = await Get(`book-reviews/book?book_id=${prop.book.id}`);
     setReviews(data.book_reviews);
   }
-  useEffect(() => {
-    getReviews();
-  }, []);
 
   useEffect(() => {
-    getReviews();
-  }, [reviews]);
+    window.addEventListener("newState", () => {
+      getReviews();
+    });
+    return window.removeEventListener("newState", console.log("removed event"));
+  }, [prop]);
 
   return (
     <>
@@ -62,7 +62,7 @@ const IndividualBook = (prop) => {
       </Segment>
 
       <Segment>
-        <CreateReview />
+        <CreateReview bookId={prop.book.id} />
       </Segment>
     </>
   );

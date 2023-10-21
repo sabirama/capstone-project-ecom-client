@@ -5,12 +5,10 @@ const BookReviewSection = (prop) => {
   const [user, setUser] = useState(prop.user[0]);
   const [review, setReview] = useState(prop.review[0]);
 
-  useEffect(() => {}, [prop]);
-
   useEffect(() => {
     setUser(prop.user[0]);
     setReview(prop.review[0]);
-  }, []);
+  }, [prop]);
 
   return (
     <Segment>
