@@ -23,7 +23,8 @@ const Home = () => {
 
   const latestRoutes = latest.map((book) => {
     return {
-      path: `${book.title}`,
+      name: book.title,
+      path: `id/${book.id}`,
       element: <IndividualBook book={book} />,
     };
   });

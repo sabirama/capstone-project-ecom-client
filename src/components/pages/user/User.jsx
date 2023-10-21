@@ -2,6 +2,8 @@ import { Segment } from "semantic-ui-react";
 import { LinkMapping, RouteMapping } from "../../lib/methods/mapping";
 import userRoutes from "../../lib/routes/pageroutes/userroutes";
 
+import "./User.css";
+
 const User = () => {
   return (
     <>

@@ -24,15 +24,27 @@ const Profie = () => {
 
   return (
     <>
-      <Header as="h2" icon>
-        <Icon name="user" />
-        User Profile
-        <Header.Subheader>Manage your account settings and set e-mail preferences.</Header.Subheader>
-        <Segment>
-          <h4>{user.first_name}</h4>
-          <h4>{user.last_name}</h4>
-          <h4>{user.email}</h4>
+      <Header as="h2" icon className="user-card">
+        <Segment className="container">
+          <div className="container usesr-icons px-1 py-0">
+            <div>
+              <Icon name="user" className="height-100" />
+            </div>
+            <div>
+              <Icon name="man" />
+            </div>
+          </div>
+          <Segment className="container flex-col text-right user-detail px-1 mt-0">
+            <div className="container">
+              <h4 className="m-0">Name: {user.first_name}</h4>
+              <h4 className="mp-0 px-1">{user.last_name}</h4>
+            </div>
+            <h4 className="mt-1 mb-1">Username: {user.username}</h4>
+            <h4 className="mt-0 mb-1">Email: {user.email}</h4>
+            <h4 className="mt-0">Birthday: {user.birthdate}</h4>
+          </Segment>
         </Segment>
+        <Header.Subheader>Manage your account settings and set e-mail preferences.</Header.Subheader>
       </Header>
     </>
   );

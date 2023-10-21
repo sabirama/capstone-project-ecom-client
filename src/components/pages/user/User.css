@@ -1,0 +1,11 @@
+.user-card {
+  width: 100% !important;
+}
+
+.user-icons {
+  width: fit-content !important;
+}
+
+.icon-image {
+  height: 200px;
+}

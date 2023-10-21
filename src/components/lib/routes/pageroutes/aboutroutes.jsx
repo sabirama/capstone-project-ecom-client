@@ -2,8 +2,9 @@ import AboutMain from "../../../pages/about/sections/AboutMain";
 import AboutUs from "../../../pages/about/sections/AboutUs";
 import BlogAndResource from "../../../pages/about/sections/BlogAndResource";
 import ContactUs from "../../../pages/about/sections/ContactUs";
-import CostumerReviews from "../../../pages/about/sections/CostumerReviews";
 import NewsletterandCommunity from "../../../pages/about/sections/NewsletterandCommunity";
+import OurStory from "../../../pages/about/sections/OurStory";
+import WhatSetsUsApart from "../../../pages/about/sections/WhatSetsUsApart";
 
 const aboutroutes = [
   {
@@ -17,6 +18,16 @@ const aboutroutes = [
     element: <AboutUs />,
   },
   {
+    name: "OUR STORY",
+    path: "our-story",
+    element: <OurStory />,
+  },
+  {
+    name: "WHAT SETS US APART",
+    path: "what-sets-us-apart",
+    element: <WhatSetsUsApart />,
+  },
+  {
     name: "BLOGS AND RESOURCES",
     path: "blogs-and-resources",
     element: <BlogAndResource />,
@@ -26,11 +37,7 @@ const aboutroutes = [
     path: "contact-us",
     element: <ContactUs />,
   },
-  {
-    name: "COSTUMER REVIEWS",
-    path: "costumer-reviews",
-    element: <CostumerReviews />,
-  },
+
   {
     name: "NEWSLETTER AND COMMUNITY",
     path: "newsletter-and-community",
