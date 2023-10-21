@@ -16,7 +16,7 @@ const IndividualBook = (prop) => {
   }, []);
 
   useEffect(() => {
-    
+    getReviews();
   }, [reviews]);
 
   return (

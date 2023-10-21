@@ -23,7 +23,7 @@ const Books = () => {
 
   const bookRoutes = books.map((book) => {
     return {
-      path: `${book.title}`,
+      path: `*page/${book.id}`,
       element: <IndividualBook book={book} />,
     };
   });
@@ -66,7 +66,7 @@ const Books = () => {
           </Routes>
         </>
       </div>
-      <Segment>{Pagination(pages, "books/*", setPageValue)}</Segment>
+      <Segment>{Pagination(pages, "books", setPageValue)}</Segment>
     </>
   );
 };
