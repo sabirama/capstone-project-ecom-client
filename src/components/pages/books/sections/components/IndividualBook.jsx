@@ -1,11 +1,23 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Segment, Menu } from "semantic-ui-react";
+import BookReviewSection from "./subcomponents/BookReviewSection";
+import Get from "../../../../lib/http/get";
+import CreateReview from "./subcomponents/CreateReview";
 
 const IndividualBook = (prop) => {
-  
+  const [reviews, setReviews] = useState([]);
+
+  async function getReviews() {
+    const { data } = await Get(`book-reviews/user?user_id=13`);
+    setReviews(data.book_reviews.data);
+  }
   useEffect(() => {
-    console.log(prop.book);
+    getReviews();
   }, []);
+
+  useEffect(() => {
+    console.log(reviews);
+  }, [reviews]);
 
   return (
     <>
@@ -24,6 +36,16 @@ const IndividualBook = (prop) => {
           <Menu.Item>BUY NOW</Menu.Item>
           <Menu.Item>ADD TO CART</Menu.Item>
         </Menu>
+      </Segment>
+
+      <Segment>
+        {reviews.map((review, index) => {
+          return <BookReviewSection key={index} review={review} />;
+        })}
+      </Segment>
+
+      <Segment>
+        <CreateReview />
       </Segment>
     </>
   );

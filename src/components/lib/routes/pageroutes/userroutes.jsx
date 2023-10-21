@@ -1,10 +1,10 @@
 import Profie from "../../../pages/user/sections/Profie";
 import Cart from "../../../pages/user/sections/Cart";
-import PastOrders from "../../../pages/user/sections/PastOrders";
+import OrderHistory from "../../../pages/user/sections/OrderHistory";
 
 const userRoutes = [
   {
-    name: "USERPROFILE",
+    name: "USER PROFILE",
     path: "*",
     element: <Profie />,
   },
@@ -14,9 +14,9 @@ const userRoutes = [
     element: <Cart />,
   },
   {
-    name: "PAST ORDERS",
-    path: "past/orders",
-    element: <PastOrders />,
+    name: "ORDER HISTORY",
+    path: "orderhistory",
+    element: <OrderHistory />,
   },
 ];
 

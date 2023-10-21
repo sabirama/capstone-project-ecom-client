@@ -77,9 +77,12 @@ const Register = () => {
     if (isLoggedIn == true) {
       if (remember == true) {
         localStorage.setItem("token", getData.token);
+        localStorage.setItem("user_id", getData.user.id);
         sessionStorage.setItem("token", getData.token);
+        sessionStorage.setItem("user_id", getData.user.id);
       } else if (remember == false) {
         sessionStorage.setItem("token", getData.token);
+        sessionStorage.setItem("user_id", getData.user.id);
       }
       if (getData.token != null) {
         window.dispatchEvent(new Event("loggedIn"));
