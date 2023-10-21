@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { Segment } from "semantic-ui-react";
 import Get from "../../../lib/http/get";
 import OrderDetails from "./components/OrderDetails";
 
