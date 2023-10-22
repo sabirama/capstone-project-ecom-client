@@ -34,10 +34,6 @@ const Home = () => {
     getReviews();
   }, []);
 
-  useEffect(() => {
-    console.log(reviews);
-  }, [reviews]);
-
   return (
     <>
       {RouteMapping(latestRoutes, [])}

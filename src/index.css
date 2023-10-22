@@ -6,6 +6,12 @@
   --dark: darkslategrey;
 }
 
+body {
+  background-image: url("/background-img/background-1.svg");
+  background-size: cover;
+  background-position: center;
+}
+
 #root {
   width: 80vw;
   min-width: 320px;
@@ -38,6 +44,7 @@ button:focus-visible {
 }
 .ui.segment {
   width: 100% !important;
+  background: rgba(255, 255, 255, 0.849);
 }
 
 .ui.pagination.menu {

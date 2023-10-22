@@ -44,6 +44,10 @@ section {
   justify-content: flex-end !important;
 }
 
+.flex-nowrap {
+  flex-wrap: nowrap !important;
+}
+
 .content-center {
   justify-content: center !important;
 }
@@ -244,4 +248,12 @@ section {
 
 .hover-color-accent:hover {
   color: var(--accent);
+}
+
+.price {
+  width: 100px;
+}
+
+.ui {
+  background: none !important;
 }

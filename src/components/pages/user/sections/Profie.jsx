@@ -5,10 +5,10 @@ import Get from "../../../lib/http/get";
 
 const Profie = () => {
   const [user, setUser] = useState([]);
-  const [edit, setEdit] = useState(false);
+  const [edit, setEdit] = useState(true);
   const [editImage, setEditImage] = useState(false);
   const [dropDown, setDropDown] = useState("close");
-  const [paymentType, setPaymentType] = useState(0);
+  const [paymentType, setPaymentType] = useState("");
   const navigate = useNavigate();
 
   async function getUser() {
@@ -16,7 +16,6 @@ const Profie = () => {
       const data = await Get("user");
       setUser(data.user);
     } catch {
-      console.log("Error getting user");
       navigate("/");
     }
   }
@@ -30,8 +29,7 @@ const Profie = () => {
   }
 
   function changePaymentType(e) {
-    setPaymentType(e.target.name);
-    console.log(paymentType);
+    setPaymentType(e.target.value);
   }
 
   function toggleDropDown() {
@@ -92,9 +90,18 @@ const Profie = () => {
         <Segment>
           <button onClick={editOption}>Edit Settings</button>
           <Segment>
-            <h3>Payment</h3>
+            <div className="flex place-center">
+              <h4 className="m-0">Prefered Payment Type: </h4>
+              <h3 className="m-0 ml-1">{paymentType}</h3>
+            </div>
             <div>
-              <button onClick={toggleDropDown}>Set Up Payment</button>
+              <input
+                type="button"
+                onClick={toggleDropDown}
+                value={dropDown == "close" ? "Set Up Payment" : "Close"}
+                className="mx-1 input"
+                disabled={edit}
+              />
               <div className={dropDown}>
                 <ul>
                   <input
@@ -123,12 +130,16 @@ const Profie = () => {
               </div>
             </div>
           </Segment>
-          <Segment className="my-1">
-            <h3>Address</h3>
-            <input type="text" readOnly={edit} placeholder="street" className="mx-1 input" />
-            <input type="text" readOnly={edit} placeholder="city" className="mx-1 input" />
-            <input type="text" readOnly={edit} placeholder="province" className="mx-1 input" />
-            <input type="button" readOnly={edit} value="Add Address" className="mx-1 input" />
+          <Segment className="my-1 flex flex-col">
+            <h3 className="content-center">Address</h3>
+            <div>
+              <input type="text" readOnly={edit} placeholder="street" className="mx-1 input" />
+              <input type="text" readOnly={edit} placeholder="city" className="mx-1 input" />
+              <input type="text" readOnly={edit} placeholder="province" className="mx-1 input" />
+            </div>
+            <div>
+              <input type="button" readOnly={edit} value="Add Address" className="mx-1 input" />
+            </div>
           </Segment>
         </Segment>
       </Segment>

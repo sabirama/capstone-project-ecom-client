@@ -7,41 +7,44 @@ import BookReviewSection from "./BookReviewSection";
 
 const IndividualBook = (prop) => {
   const [reviews, setReviews] = useState([]);
-
+  function logger() {
+    console.log(prop);
+  }
   async function getReviews() {
-    const { data } = await Get(`book-reviews/book?book_id=${prop.book.id}`);
+    const data = await Get(`book-reviews/book?book_id=${prop.book.id}`);
     setReviews(data.book_reviews);
   }
 
   useEffect(() => {
-    getReviews();
-  }, [prop]);
-
-  useEffect(() => {
     window.addEventListener("addedBookReview", () => {
       getReviews();
-      window.removeEventListener("addedBookReview", () => {
-        console.log("removed");
-      });
     });
     return () => {
-      window.removeEventListener("addedBookReview", () => {
-        console.log("removed");
-      });
+      window.removeEventListener("addedBookReview", () => {});
     };
   }, [prop]);
 
   return (
     <>
+      <button onClick={logger}>TEST</button>
       <Segment className="p-1 container flex-col width-100">
-        <img src="" alt="book cover" />
-        <Segment className="py-1">
-          <h1>{prop.book.title}</h1>
-          <p>Written by: {prop.book.book_details.author.pen_name}</p>
+        <img
+          src={prop.book.book_image ? import.meta.env.VITE_SOURCE_URL + prop.book.book_image[0].image_path : ""}
+          alt="book cover"
+          className="book-cover"
+        />
+        <Segment className="py-1 container">
+          <div className="width-100">
+            <h1>{prop.book.title}</h1>
+            <p>Written by: {prop.book.book_details.author[0].pen_name}</p>
+          </div>
+          <div className="container price place-center">
+            <h3 className="width-100">{prop.book.price} Php</h3>
+          </div>
         </Segment>
         <Segment className="py-1">
           <h3>Details</h3>
-          <p>{prop.book.title}</p>
+          <p>{prop.book.book_details.body}</p>
         </Segment>
       </Segment>
 

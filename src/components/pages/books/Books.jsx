@@ -17,9 +17,13 @@ const Books = () => {
 
   //get books from server
   async function getBooks() {
-    const { data } = await Get(`books?page_size=20&page=${pageValue}`);
-    setBooks(data.data);
-    setPages(data.meta.links);
+    const data = await Get(`books?page_size=20&page=${pageValue}`);
+    if (data.data) {
+      setBooks(data.data);
+      setPages(data.meta.links);
+    } else {
+      setBooks([]);
+    }
   }
 
   const bookRoutes = books.map((book) => {
@@ -31,43 +35,54 @@ const Books = () => {
 
   useEffect(() => {
     getBooks();
-    console.log(Number(pageValue) + 1);
   }, [pageValue]);
 
   return (
     <>
-      <Segment className="container">
-        <div className="container flex">
-          <h1>Books</h1>
-          <div className="px-1 check-group">
-            <div className="ml-2">
-              <input type="radio" name="display-by" />
-              <label className="ml-1">by Name</label>
+      {books != [] ? (
+        <>
+          <Segment className="container">
+            <div className="container flex">
+              <h1>Books</h1>
+              <div className="px-1 check-group">
+                <div className="ml-2">
+                  <input type="radio" name="display-by" />
+                  <label className="ml-1">by Name</label>
+                </div>
+                <div className="ml-2">
+                  <input type="radio" name="display-by" />
+                  <label className="ml-1">by Latest</label>
+                </div>
+                <div className="ml-2">
+                  <input type="radio" name="display-by" />
+                  <label className="ml-1">by Author</label>
+                </div>
+                <div className="ml-2">
+                  <input type="radio" name="display-by" />
+                  <label className="ml-1">by Genre</label>
+                </div>
+              </div>
             </div>
-            <div className="ml-2">
-              <input type="radio" name="display-by" />
-              <label className="ml-1">by Latest</label>
-            </div>
-            <div className="ml-2">
-              <input type="radio" name="display-by" />
-              <label className="ml-1">by Author</label>
-            </div>
-            <div className="ml-2">
-              <input type="radio" name="display-by" />
-              <label className="ml-1">by Genre</label>
-            </div>
-          </div>
-        </div>
-      </Segment>
+          </Segment>
+        </>
+      ) : (
+        <>Oops! we are experiencing some errors with our server.</>
+      )}
       <div>
         <>
-          {RouteMapping(bookRoutes, [])}
-          <Routes>
-            <Route path="*" element={<BookPages books={books} />} />
-          </Routes>
+          {books != [] ? (
+            <>
+              {RouteMapping(bookRoutes, [])}
+              <Routes>
+                <Route path="*" element={<BookPages books={books} />} />
+              </Routes>
+            </>
+          ) : (
+            <>PROBLEM LOADNG BOOKS </>
+          )}
         </>
       </div>
-      <Segment>{Pagination(pages, "books", setPageValue)}</Segment>
+      <Segment>{books != [] ? <>{Pagination(pages, "books", setPageValue)}</> : <>no links found</>}</Segment>
     </>
   );
 };

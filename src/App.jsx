@@ -4,6 +4,7 @@ import mainroutes from "./components/lib/routes/mainroutes";
 import Header from "./components/header/Header";
 import Footer from "./components/footer/Footer";
 import "./App.css";
+import "./components/Components.css";
 
 function App() {
   return (

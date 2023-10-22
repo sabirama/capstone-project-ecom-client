@@ -9,7 +9,7 @@ const OrderHistory = () => {
   const user = sessionStorage.getItem("user_id");
 
   async function getOrders() {
-    const { data } = await Get(`orders/${user}`);
+    const data = await Get(`orders/${user}`);
     setOrderHistory(data.orders);
   }
 
