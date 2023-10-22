@@ -1,9 +1,9 @@
+import { useEffect, useState } from "react";
 import { Menu, Input, Icon } from "semantic-ui-react";
 import { Link, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
-import "./Header.css";
 import Post from "../lib/http/post";
 
+import "./Header.css";
 const Header = () => {
   const [searchRequest, setSearchRequest] = useState("");
   const [visible, setVisible] = useState("hidden");
@@ -67,7 +67,7 @@ const Header = () => {
     // eslint-disable-next-line react/prop-types
     sessionStorage.setItem("search", searchRequest);
     window.dispatchEvent(new Event("search"));
-    console.log(searchRequest);
+    navigate("/search");
   }
 
   useEffect(() => {
@@ -95,6 +95,7 @@ const Header = () => {
       <Menu className="container">
         <Menu.Item as={Link} to="/" className="home links" onClick={closeNav}>
           <Icon name="home" />
+          <p className="hover-color-primary">Home</p>
         </Menu.Item>
       </Menu>
       <Menu>
@@ -109,28 +110,28 @@ const Header = () => {
       <Menu className={`container nav-links nav-bar ${visible}`}>
         <Menu.Item as={Link} to="/books" className="links" onClick={closeNav}>
           <Icon name="leanpub" />
-          Books
+          <p className="hover-color-primary">Books</p>
         </Menu.Item>
         <Menu.Item as={Link} to="/about" className="links" onClick={closeNav}>
           <Icon name="info" />
-          About
+          <p className="hover-color-primary">About</p>
         </Menu.Item>
 
         <Menu.Item as={Link} to="/user/cart" className={`links ${loggedIn}`} onClick={closeNav}>
           <Icon name="cart" />
-          Cart
+          <p className="hover-color-primary">Cart</p>
         </Menu.Item>
 
         <Menu.Item as={Link} to="/user" className={`links ${loggedIn}`} onClick={closeNav}>
           <Icon name="user circle outline" />
-          User
+          <p className="hover-color-primary">User</p>
         </Menu.Item>
 
         <Menu.Item as={Link} to="/log-in" className={`links ${logOutlink}`} onClick={closeNav}>
-          Log-in
+          <p className="hover-color-primary">Log in</p>
         </Menu.Item>
         <Menu.Item as={Link} className={`links ${loggedIn}`} onClick={logOut}>
-          Log-out
+          <p className="hover-color-primary">Log out</p>
         </Menu.Item>
       </Menu>
     </>

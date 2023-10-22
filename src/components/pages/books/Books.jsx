@@ -2,13 +2,13 @@
 import { Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Segment } from "semantic-ui-react";
+import { RouteMapping } from "../../subcomponents/mapping";
 import Get from "../../lib/http/get";
 import BookPages from "./sections/BookPages";
-import Pagination from "../../lib/methods/pagination";
-import IndividualBook from "./sections/components/IndividualBook";
+import Pagination from "../../subcomponents/pagination";
+import IndividualBook from "../../subcomponents/IndividualBook";
 
 import "./Books.css";
-import { RouteMapping } from "../../lib/methods/mapping";
 
 const Books = () => {
   const [books, setBooks] = useState([]);

@@ -1,4 +1,4 @@
-import { RouteMapping } from "../../lib/methods/mapping";
+import { RouteMapping } from "../../subcomponents/mapping";
 import authroute from "../../lib/routes/pageroutes/authroute";
 
 import "./Authentication.css";

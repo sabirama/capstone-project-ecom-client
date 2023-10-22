@@ -1,9 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import { Segment, Menu } from "semantic-ui-react";
-import BookReviewSection from "./subcomponents/BookReviewSection";
-import Get from "../../../../lib/http/get";
-import CreateReview from "./subcomponents/CreateBookReview";
+import Get from "../lib/http/get";
+import CreateBookReview from "./CreateBookReview";
+import BookReviewSection from "./BookReviewSection";
 
 const IndividualBook = (prop) => {
   const [reviews, setReviews] = useState([]);
@@ -20,14 +20,16 @@ const IndividualBook = (prop) => {
   useEffect(() => {
     window.addEventListener("addedBookReview", () => {
       getReviews();
-      console.log("event caught");
+      window.removeEventListener("addedBookReview", () => {
+        console.log("removed");
+      });
     });
     return () => {
       window.removeEventListener("addedBookReview", () => {
-        console.log("event removed");
+        console.log("removed");
       });
     };
-  }, []);
+  }, [prop]);
 
   return (
     <>
@@ -62,17 +64,19 @@ const IndividualBook = (prop) => {
           <h2>Reviews</h2>
         </Segment>
 
-        {reviews.map((review, index) => {
-          return (
-            <div key={index} className="container py-1">
-              <BookReviewSection review={review.book_reviews} user={review.user} />
-            </div>
-          );
+        {reviews.map((bookreviews) => {
+          return bookreviews.book_reviews.map((review, index) => {
+            return review != null ? (
+              <div key={index} className="container py-1">
+                <BookReviewSection review={review} user={bookreviews.user} />
+              </div>
+            ) : null;
+          });
         })}
       </Segment>
 
       <Segment>
-        <CreateReview bookId={prop.book.id} />
+        <CreateBookReview bookId={prop.book.id} />
       </Segment>
     </>
   );

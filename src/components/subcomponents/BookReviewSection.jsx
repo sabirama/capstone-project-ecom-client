@@ -2,20 +2,19 @@ import { useEffect, useState } from "react";
 import { Segment } from "semantic-ui-react";
 
 const BookReviewSection = (prop) => {
-  const [user, setUser] = useState(prop.user[0]);
-  const [review, setReview] = useState(prop.review[0]);
+  const [user, setUser] = useState(prop.user);
+  const [review, setReview] = useState(prop.review);
 
   useEffect(() => {
-    setUser(prop.user[0]);
-    setReview(prop.review[0]);
+    setUser(prop.user);
+    setReview(prop.review);
+    console.log(prop.user);
   }, [prop]);
 
   return (
     <Segment>
       <div>
-        <h3>
-          {user.first_name} {user.last_name}
-        </h3>
+        <h3>{user[0].username}</h3>
         <p>{review.body}</p>
       </div>
     </Segment>

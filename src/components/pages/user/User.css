@@ -2,10 +2,40 @@
   width: 100% !important;
 }
 
-.user-icons {
-  width: fit-content !important;
-}
-
 .icon-image {
   height: 200px;
+}
+
+.input[type="text"] {
+  border: none;
+  border-bottom: 1px solid var(--primary);
+  margin: 1rem;
+}
+
+.profile-pic {
+  width: 100px;
+  height: 180px;
+}
+
+input[type="file"] {
+  width: 180px;
+  color: transparent;
+}
+
+.change-img-btn {
+  width: 180px;
+}
+
+.open {
+  transition-duration: 1s;
+}
+
+.close {
+  display: none;
+  transition-duration: 1s;
+}
+
+.payment-button {
+  width: 150px;
+  margin: 1rem;
 }

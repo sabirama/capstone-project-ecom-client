@@ -1,10 +1,10 @@
 /* eslint-disable react/no-unescaped-entities */
 import { useEffect, useState } from "react";
-import { RouteMapping } from "../../lib/methods/mapping";
+import { RouteMapping } from "../../subcomponents/mapping";
 import { Routes, Route } from "react-router-dom";
-import MainPage from "./components/MainPage";
+import MainPage from "./sections/MainPage";
 import request from "../../lib/http/request";
-import IndividualBook from "../books/sections/components/IndividualBook";
+import IndividualBook from "../../subcomponents/IndividualBook";
 import "./Home.css";
 
 const Home = () => {

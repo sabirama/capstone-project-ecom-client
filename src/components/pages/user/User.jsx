@@ -1,5 +1,5 @@
 import { Segment } from "semantic-ui-react";
-import { LinkMapping, RouteMapping } from "../../lib/methods/mapping";
+import { LinkMapping, RouteMapping } from "../../subcomponents/mapping";
 import userRoutes from "../../lib/routes/pageroutes/userroutes";
 
 import "./User.css";
@@ -14,7 +14,7 @@ const User = () => {
         </div>
       </Segment>
 
-      <Segment className="container">{RouteMapping(userRoutes, [])}</Segment>
+      {RouteMapping(userRoutes, [])}
     </>
   );
 };

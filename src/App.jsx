@@ -1,4 +1,4 @@
-import { RouteMapping } from "./components/lib/methods/mapping";
+import { RouteMapping } from "./components/subcomponents/mapping";
 import mainroutes from "./components/lib/routes/mainroutes";
 
 import Header from "./components/header/Header";
@@ -12,6 +12,7 @@ function App() {
         <Header />
       </header>
       <section>{RouteMapping(mainroutes, [])}</section>
+
       <footer className="footer py-1">
         <Footer />
       </footer>

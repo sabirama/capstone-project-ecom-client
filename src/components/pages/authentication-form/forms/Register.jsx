@@ -14,8 +14,9 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setconfirmPassword] = useState("");
   const [getData, setGetData] = useState([]);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggingIn, setIsLoggingIn] = useState(false);
   const [remember, setRremember] = useState(false);
+  const [authorize, setAuthorize] = useState(true);
 
   function firstnameChange(e) {
     setfirstName(e.target.value);
@@ -66,7 +67,8 @@ const Register = () => {
 
   async function logIn() {
     await post();
-    setIsLoggedIn(true);
+    setIsLoggingIn(true);
+    setAuthorize(false);
   }
 
   async function post() {
@@ -74,7 +76,7 @@ const Register = () => {
   }
 
   useEffect(() => {
-    if (isLoggedIn == true) {
+    if (getData.user != null) {
       if (remember == true) {
         localStorage.setItem("token", getData.token);
         localStorage.setItem("user_id", getData.user.id);
@@ -84,13 +86,13 @@ const Register = () => {
         sessionStorage.setItem("token", getData.token);
         sessionStorage.setItem("user_id", getData.user.id);
       }
-      if (getData.token != null) {
-        window.dispatchEvent(new Event("loggedIn"));
-        window.location.href = "/";
-      }
-      setIsLoggedIn(false);
+
+      window.dispatchEvent(new Event("loggedIn"));
+      window.location.href = "/";
+
+      setIsLoggingIn(false);
     }
-  }, [isLoggedIn]);
+  }, [isLoggingIn]);
 
   return (
     <Segment>
@@ -162,6 +164,14 @@ const Register = () => {
       <span>
         Already have an account? <Link to="/log-in/">Log-in.</Link>
       </span>
+
+      <Segment className="container">
+        {authorize == true ? (
+          <>Please input your username and password</>
+        ) : (
+          <>Wrong username or password. Please input your username and password again.</>
+        )}
+      </Segment>
     </Segment>
   );
 };

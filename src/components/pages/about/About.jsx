@@ -1,4 +1,4 @@
-import { LinkMapping, RouteMapping } from "../../lib/methods/mapping";
+import { LinkMapping, RouteMapping } from "../../subcomponents/mapping";
 import aboutroutes from "../../lib/routes/pageroutes/aboutroutes";
 import { Segment } from "semantic-ui-react";
 

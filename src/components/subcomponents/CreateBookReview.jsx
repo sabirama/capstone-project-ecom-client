@@ -1,11 +1,10 @@
 import { Form } from "semantic-ui-react";
 
-import Post from "../../../../../lib/http/post";
-import { useEffect, useState } from "react";
+import Post from "../lib/http/post";
+import { useState } from "react";
 
 const CreateBookReview = (prop) => {
   const [reviewBody, setReviewBody] = useState("");
-  const [review, setReview] = useState("");
   const [rate, setRate] = useState(null);
   const userId = sessionStorage.getItem("user_id");
 
@@ -18,8 +17,8 @@ const CreateBookReview = (prop) => {
   }
 
   async function postReview() {
-    await Post("/book-reviews", postData, setReview);
-    console.log(review);
+    await Post("/book-reviews", postData);
+    window.dispatchEvent(new Event("addedBookReview"));
   }
 
   const postData = {
@@ -28,14 +27,6 @@ const CreateBookReview = (prop) => {
     body: reviewBody,
     rate: rate,
   };
-
-  function logger() {
-    console.log(postData);
-  }
-
-  useEffect(() => {
-    window.dispatchEvent(new Event("addedBookReview"));
-  }, [review]);
 
   return (
     <>
@@ -49,10 +40,7 @@ const CreateBookReview = (prop) => {
           <input type="radio" value={5} name="rating" onClick={createRate} />
         </div>
         <button onClick={postReview} className="button">
-          Test
-        </button>
-        <button onClick={logger} className="button">
-          CONSOLE LOG
+          Post Review
         </button>
       </Form>
     </>

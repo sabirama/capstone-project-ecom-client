@@ -7,8 +7,9 @@ const LogIn = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [getData, setGetData] = useState([]);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggingIn, setIsLoggingIn] = useState(false);
   const [remember, setRremember] = useState(false);
+  const [authorize, setAuthorize] = useState(true);
 
   function userChange(e) {
     setUsername(e.target.value);
@@ -23,7 +24,8 @@ const LogIn = () => {
 
   async function logIn() {
     await post();
-    setIsLoggedIn(true);
+
+    setIsLoggingIn(true);
   }
 
   //go to homepage after log-in/register
@@ -35,57 +37,81 @@ const LogIn = () => {
 
   async function post() {
     await Post("login", postData, setGetData);
+    setAuthorize(false);
   }
 
   useEffect(() => {
-    if (isLoggedIn == true) {
+    if (getData.user != null) {
       if (remember == true) {
-        localStorage.setItem("token", getData.token);
-        localStorage.setItem("user_id", getData.user.id);
+        localStorage.setItem("username", username);
+        localStorage.setItem("password", password);
         sessionStorage.setItem("token", getData.token);
         sessionStorage.setItem("user_id", getData.user.id);
       } else if (remember == false) {
         sessionStorage.setItem("token", getData.token);
         sessionStorage.setItem("user_id", getData.user.id);
       }
-      if (getData.token != null) {
-        window.dispatchEvent(new Event("loggedIn"));
-        window.location.href = "/";
-      }
-      setIsLoggedIn(false);
+      window.dispatchEvent(new Event("loggedIn"));
+      window.location.href = "/";
+      setIsLoggingIn(false);
+    } else {
+      console.log(authorize);
     }
-  }, [isLoggedIn]);
+    setUsername(localStorage.getItem("username"));
+    setPassword(localStorage.getItem("password"));
+  }, [isLoggingIn]);
 
   return (
     <Segment>
-      <h1>Log In</h1>
+      {localStorage.getItem("username") ? (
+        <>
+          <div className="flex">
+            <button className="m-0" onClick={logIn}>
+              Log in as <strong>{username}?</strong>
+            </button>
+          </div>
+        </>
+      ) : (
+        <></>
+      )}
+      <Segment>
+        <h1>Log In</h1>
 
-      <Form className="form log-in">
-        <Form.Field control={Input} label="Username" placeholder="Username" onChange={userChange} />
+        <Form className="form log-in">
+          <Form.Field control={Input} label="Username" placeholder="Username" onChange={userChange} />
 
-        <Form.Field
-          control={Input}
-          type="password"
-          label="Password"
-          placeholder="Password"
-          autoComplete="on"
-          onChange={passChange}
-        />
+          <Form.Field
+            control={Input}
+            type="password"
+            label="Password"
+            placeholder="Password"
+            autoComplete="on"
+            onChange={passChange}
+          />
 
-        <Form.Group className="form-submit">
-          <span className="form-element">
-            <input type="checkbox" onClick={rememberMe} value={remember} />
-            <span>Remember me</span>
-          </span>
-          <Link className="form-element">Forgot password?</Link>
-          <button className="form-button form-element" onClick={logIn}>
-            Log-in
-          </button>
-        </Form.Group>
-      </Form>
-      <span>
-        Don`t have an account? <Link to="/log-in/register">Register</Link>
-      </span>
+          <Form.Group className="form-submit">
+            <span className="form-element">
+              <input type="checkbox" onClick={rememberMe} value={remember} />
+              <span>Remember me</span>
+            </span>
+            <Link className="form-element">Forgot password?</Link>
+            <button className="form-button form-element" onClick={logIn}>
+              Log-in
+            </button>
+          </Form.Group>
+        </Form>
+        <span>
+          Don`t have an account? <Link to="/log-in/register">Register</Link>
+        </span>
+      </Segment>
+
+      <Segment className="container">
+        {authorize == true ? (
+          <>Please input your username and password</>
+        ) : (
+          <>Wrong username or password. Please input your username and password again.</>
+        )}
+      </Segment>
     </Segment>
   );
 };
