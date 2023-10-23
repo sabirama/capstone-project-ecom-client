@@ -18,7 +18,6 @@ const OrderHistory = () => {
   }, [user]);
 
   useEffect(() => {
-    console.log(orderHistory);
     setOrders(
       orderHistory.map((order) => {
         if (order.order_details.order_item.length != 0) {
@@ -32,7 +31,6 @@ const OrderHistory = () => {
         }
       })
     );
-    console.log(orders);
   }, [orderHistory]);
 
   return (

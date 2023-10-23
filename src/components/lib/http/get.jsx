@@ -5,7 +5,7 @@ const Get = async function (query) {
     const { data } = await request.get(query);
     return data;
   } catch (e) {
-    return console.log(e);
+    return e;
   }
 };
 

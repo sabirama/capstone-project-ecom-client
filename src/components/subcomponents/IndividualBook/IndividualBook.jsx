@@ -5,18 +5,47 @@ import CreateBookReview from "../CreateBookReview";
 import BookReviewSection from "../BookReviewSection";
 import Get from "../../lib/http/get";
 import BuyNowModal from "./component-parts/BuyNowModal";
+import AddToCart from "./component-parts/AddToCart";
 
-const IndividualBook = (prop) => {
-  const [title, setTitle] = useState("");
-  const [author, setAuthor] = useState("");
-  const [detail, setDetail] = useState("");
-  const [price, setPrice] = useState(0.0);
+const IndividualBook = () => {
+  const [changeDisplay, setChangeDisplay] = useState(false);
+  const [title, setTitle] = useState(sessionStorage.getItem("current_title"));
+  const [author, setAuthor] = useState(sessionStorage.getItem("current_author"));
+  const [detail, setDetail] = useState(sessionStorage.getItem("current_detail"));
+  const [price, setPrice] = useState(sessionStorage.getItem("current_price"));
   const [reviews, setReviews] = useState([]);
   const [path, setPath] = useState("");
+  const [genre, setGenre] = useState("");
   const [buyNow, setBuyNow] = useState(false);
+  const [cartItem, setCartItem] = useState(false);
+  const bookId = sessionStorage.getItem("current_id");
+
+  function setItems() {
+    setChangeDisplay(!changeDisplay);
+  }
+
+  useEffect(() => {
+    window.addEventListener("displayBook", function () {
+      setItems();
+    });
+
+    return () => {
+      window.removeEventListener("dispayBook", function () {});
+    };
+  }, [changeDisplay]);
+
+  useEffect(() => {
+    setTitle(sessionStorage.getItem("current_title"));
+    setAuthor(sessionStorage.getItem("current_author"));
+    setDetail(sessionStorage.getItem("current_detail"));
+    setPrice(sessionStorage.getItem("current_price"));
+    setPath(sessionStorage.getItem("current_image"));
+    setGenre(sessionStorage.getItem("current_genre"));
+    getReviews();
+  }, [changeDisplay]);
 
   async function getReviews() {
-    const data = await Get(`book-reviews/book?book_id=${prop.book.id}`);
+    const data = await Get(`book-reviews/book?book_id=${bookId}`);
     setReviews(data.book_reviews);
   }
 
@@ -25,28 +54,11 @@ const IndividualBook = (prop) => {
     scrollTo(top);
   }
 
-  useEffect(() => {
-    getReviews();
-  }, []);
+  function toggleCart() {
+    setCartItem(!cartItem);
+  }
 
-  useEffect(() => {
-    if (prop.book != []) {
-      setTitle(prop.book.title);
-      setAuthor(prop.book.book_details.author[0].pen_name);
-      setPrice(prop.book.price);
-      setDetail(prop.book.book_details.body);
-      if (prop.book.book_image.length != 0) {
-        setPath(import.meta.env.VITE_SOURCE_URL + prop.book.book_image[0].image_path);
-      }
-    }
-
-    window.addEventListener("addedBookReview", () => {
-      getReviews();
-    });
-    return () => {
-      window.removeEventListener("addedBookReview", () => {});
-    };
-  }, [prop]);
+  useEffect(() => {}, [reviews]);
 
   return (
     <>
@@ -58,7 +70,7 @@ const IndividualBook = (prop) => {
               <Container className="py-1 container flex">
                 <div className="width-100">
                   <h1 className="text-center">{title}</h1>
-                  <p>Written by: {author}</p>
+                  <p>Author: {author}</p>
                 </div>
                 <div className="container price place-center">
                   <h3 className="width-100">{price} Php</h3>
@@ -67,6 +79,7 @@ const IndividualBook = (prop) => {
               <Segment className="py-1">
                 <h3>Details</h3>
                 <p>{detail}</p>
+                <p>genre: {genre}</p>
               </Segment>
             </Segment>
             <Menu className="flex content-space-between">
@@ -75,7 +88,7 @@ const IndividualBook = (prop) => {
               </Menu.Item>
 
               <Menu.Item>
-                <button className="button">ADD TO CART</button>
+                <button onClick={toggleCart}>ADD TO CART</button>
               </Menu.Item>
 
               <Segment className="container button-container">
@@ -83,29 +96,36 @@ const IndividualBook = (prop) => {
               </Segment>
             </Menu>
             <Segment>
-              <Segment>
-                <h2>Reviews</h2>
-              </Segment>
+              {reviews.length != 0 ? (
+                <>
+                  <Segment>
+                    <h2>Reviews</h2>
+                  </Segment>
 
-              {reviews.map((bookreviews) => {
-                return bookreviews.book_reviews.map((review, index) => {
-                  return review != null ? (
-                    <div key={index} className="container py-1">
-                      <BookReviewSection review={review} user={bookreviews.user} />
-                    </div>
-                  ) : null;
-                });
-              })}
+                  {reviews.map((bookreviews) => {
+                    return bookreviews.book_reviews.map((review, index) => {
+                      return review != null ? (
+                        <div key={index} className="container py-1">
+                          <BookReviewSection review={review} user={bookreviews.user} />
+                        </div>
+                      ) : null;
+                    });
+                  })}
+                </>
+              ) : (
+                <>
+                  <img src="/loader.gif" alt="" className="loader" />
+                </>
+              )}
             </Segment>
             <Segment>
-              <CreateBookReview bookId={prop.book.id} />
+              <CreateBookReview bookId={bookId} />
             </Segment>
           </>
         ) : (
-          <>
-            <BuyNowModal setter={toggleBuy} />
-          </>
+          <BuyNowModal setter={toggleBuy} />
         )}
+        {cartItem == false ? <></> : <AddToCart setter={toggleCart} />}
       </>
     </>
   );

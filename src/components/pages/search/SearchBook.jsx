@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Segment, Grid } from "semantic-ui-react";
-import Search from "../../subcomponents/Search";
 import Get from "../../lib/http/get";
+import Search from "./components/Search";
 import BookDisplay from "../../subcomponents/BookDisplay";
 
 const SearchBook = () => {
@@ -17,7 +17,6 @@ const SearchBook = () => {
     try {
       const data = await Get(`search?val=${searchVal}&page_size=30`);
       setSearchBookResult(data.books);
-      console.log(data);
     } catch (e) {
       setError(e);
     }
@@ -28,9 +27,7 @@ const SearchBook = () => {
     searchFor();
   }, [searchVal]);
 
-  useEffect(() => {
-    console.log(["books", searchBookResult]);
-  }, [searchBookResult]);
+  useEffect(() => {}, [searchBookResult]);
 
   return (
     <>

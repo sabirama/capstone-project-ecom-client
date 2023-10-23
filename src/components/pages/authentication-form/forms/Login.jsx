@@ -10,6 +10,10 @@ const LogIn = () => {
   const [isLoggingIn, setIsLoggingIn] = useState(false);
   const [remember, setRremember] = useState(false);
   const [authorize, setAuthorize] = useState(true);
+  const postData = {
+    username: username,
+    password: password,
+  };
 
   function userChange(e) {
     setUsername(e.target.value);
@@ -27,13 +31,6 @@ const LogIn = () => {
 
     setIsLoggingIn(true);
   }
-
-  //go to homepage after log-in/register
-
-  const postData = {
-    username: username,
-    password: password,
-  };
 
   async function post() {
     await Post("login", postData, setGetData);

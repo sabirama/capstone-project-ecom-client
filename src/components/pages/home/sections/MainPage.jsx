@@ -19,23 +19,30 @@ const MainPage = (props) => {
         </div>
       </Segment>
 
-      <Segment className="container flex-col overflow-x-auto">
-        <h3>Latest Books</h3>
-        <div className="container">
-          {props.latest.map((book, index) => {
-            return <BookDisplay key={index} book={book} />;
-          })}
-        </div>
-      </Segment>
-
-      <Segment className="container flex-col py-1">
-        <h3>Customer Reviews</h3>
-        <div className="container flex-col">
-          {props.reviews.map((review, index) => {
-            return <OrderReviews key={index} review={review} />;
-          })}
-        </div>
-      </Segment>
+      {props.latest.length == 0 ? (
+        <img src="loader.gif" alt="" className="loader" />
+      ) : (
+        <Segment className="container flex-col overflow-x-auto">
+          <h3>Latest Books</h3>
+          <div className="container">
+            {props.latest.map((book, index) => {
+              return <BookDisplay key={index} book={book} />;
+            })}
+          </div>
+        </Segment>
+      )}
+      {props.reviews.length == 0 ? (
+        <img src="loader.gif" alt="" className="loader" />
+      ) : (
+        <Segment className="container flex-col py-1 my-2">
+          <h3>Customer Reviews</h3>
+          <div className="container flex-col">
+            {props.reviews.map((review, index) => {
+              return <OrderReviews key={index} review={review} />;
+            })}
+          </div>
+        </Segment>
+      )}
     </>
   );
 };

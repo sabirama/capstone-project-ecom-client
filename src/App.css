@@ -263,3 +263,7 @@ section {
 .ui {
   background: none !important;
 }
+
+.loader {
+  height: 40px;
+}

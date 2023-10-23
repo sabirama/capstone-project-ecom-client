@@ -17,6 +17,16 @@ const Register = () => {
   const [isLoggingIn, setIsLoggingIn] = useState(false);
   const [remember, setRremember] = useState(false);
   const [authorize, setAuthorize] = useState(true);
+  const postData = {
+    first_name: firstname,
+    last_name: lastname,
+    username: username,
+    email: email,
+    gender: gender,
+    birthdate: birthday,
+    password: password,
+    password_confirmation: confirmPassword,
+  };
 
   function firstnameChange(e) {
     setfirstName(e.target.value);
@@ -53,17 +63,6 @@ const Register = () => {
   function rememberMe() {
     setRremember(!remember);
   }
-
-  const postData = {
-    first_name: firstname,
-    last_name: lastname,
-    username: username,
-    email: email,
-    gender: gender,
-    birthdate: birthday,
-    password: password,
-    password_confirmation: confirmPassword,
-  };
 
   async function logIn() {
     await post();

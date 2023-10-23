@@ -16,7 +16,6 @@ const Cart = () => {
   async function getItems() {
     const data = await Get(`order-items:user/${cart.id}`);
     setItems(data);
-    console.log("got items");
   }
 
   useEffect(() => {
@@ -27,13 +26,10 @@ const Cart = () => {
     getItems();
   }, [cart]);
 
-  function logger() {
-    console.log(items.order_items[0]);
-  }
 
   return (
     <>
-      <button onClick={logger}> TEst</button>
+
       {items.order_items != null ? (
         <>
           <Segment className="container">

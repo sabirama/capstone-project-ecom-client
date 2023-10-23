@@ -5,7 +5,7 @@ const RememberToken = () => {
     try {
       sessionStorage.setItem("token", token);
     } catch {
-      console.log("token does not exist");
+      return "error";
     }
   }
 };

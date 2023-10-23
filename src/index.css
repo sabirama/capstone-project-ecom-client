@@ -43,6 +43,14 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+input,
+textarea {
+  background: rgba(255, 255, 255, 0.178);
+  border: none;
+  padding: 0.25rem;
+  resize: none;
+}
+
 .ui.button {
   margin: 0;
 }

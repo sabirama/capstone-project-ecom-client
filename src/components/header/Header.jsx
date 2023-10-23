@@ -10,7 +10,6 @@ const Header = () => {
   const [loggedIn, setLoggedIn] = useState("link-hidden");
   const [logOutlink, setLogOutLink] = useState("Link-show");
   const navigate = useNavigate();
-  const token = sessionStorage.getItem("token");
 
   function isLoggedIn() {
     if (
@@ -32,8 +31,6 @@ const Header = () => {
       setLogOutLink("link-show");
       setLoggedIn("link-hidden");
       navigate("/");
-      console.log(token);
-      console.log("log out");
     });
   }
 
@@ -72,9 +69,7 @@ const Header = () => {
 
   useEffect(() => {
     isLoggedIn();
-  }, []);
 
-  useEffect(() => {
     //listen to event log in
     window.addEventListener("loggedIn", function () {
       setLoggedIn("link-show");
@@ -107,6 +102,7 @@ const Header = () => {
         </Input>
       </Menu>
 
+      {/* Navigation responsive */}
       <Menu className={`container nav-links nav-bar ${visible}`}>
         <Menu.Item as={Link} to="/books" className="links" onClick={closeNav}>
           <Icon name="leanpub" />

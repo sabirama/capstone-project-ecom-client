@@ -14,24 +14,36 @@ function App() {
   const userId = sessionStorage.getItem("user_id");
   const [register, setRegister] = useState(sessionStorage.getItem("register"));
 
-  async function getCart() {
-    const data = await Get(`cart-user/${userId}`);
-    setCartId(data);
-  }
-
   async function createCart() {
     await Post("cart", { user_id: sessionStorage.getItem("user_id"), setCartId });
   }
 
+  async function getCart() {
+    const data = await Get(`cart-user/${userId}`);
+    setCartId(data);
+    sessionStorage.setItem("cart_id", cartId.id);
+  }
+
   useEffect(() => {
-    if (register == true) {
-      createCart();
+    setRegister(sessionStorage.getItem("register"));
+    if (register == "true") {
       setRegister(false);
+      createCart();
     } else {
       getCart();
     }
+  }, []);
+
+  useEffect(() => {
+    if (cartId == undefined) {
+      getCart();
+    }
+    sessionStorage.setItem("cart_id", cartId.id);
   }, [cartId]);
 
+  function logger() {
+    console.log(cartId);
+  }
   return (
     <>
       <header className="container">
@@ -41,7 +53,7 @@ function App() {
       <section>
         <Routes>{RouteMapping(mainroutes, [])}</Routes>
       </section>
-
+      <button onClick={logger}>test</button>
       <footer className="footer py-1">
         <Footer />
       </footer>

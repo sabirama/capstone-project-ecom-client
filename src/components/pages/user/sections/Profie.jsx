@@ -38,7 +38,6 @@ const Profie = () => {
     } else if (dropDown == "open") {
       setDropDown("close");
     }
-    console.log(dropDown);
   }
 
   useEffect(() => {

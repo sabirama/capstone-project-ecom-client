@@ -19,12 +19,12 @@ const Books = () => {
 
   function sortBy(e) {
     setSort(e.target.value);
-    console.log(sort);
   }
 
   //get books from server
   async function getBooks() {
     const data = await Get(`${sort}?page=${pageValue}&page_size=20`);
+
     if (data.data) {
       setBooks(data.data);
       setPages(data.meta.links);
@@ -47,31 +47,26 @@ const Books = () => {
   return (
     <>
       <Routes>{RouteMapping(bookRoutes, [])}</Routes>
-      {books != [] ? (
-        <>
-          <Segment className="container">
-            <div className="container flex">
-              <h1>Books</h1>
-              <div className="px-1 check-group">
-                <div className="ml-2">
-                  <input type="radio" name="display-by" value="books:name" onClick={sortBy} />
-                  <label className="ml-1">by Name</label>
-                </div>
-                <div className="ml-2">
-                  <input type="radio" name="display-by" value="books:latest" onClick={sortBy} />
-                  <label className="ml-1">by Latest</label>
-                </div>
-              </div>
+      <Segment className="container">
+        <div className="container flex">
+          <h1>Books</h1>
+          <div className="px-1 check-group">
+            <div className="ml-2">
+              <input type="radio" name="display-by" value="books:name" onClick={sortBy} />
+              <label className="ml-1">by Name</label>
             </div>
-          </Segment>
-        </>
-      ) : (
-        <></>
-      )}
-
+            <div className="ml-2">
+              <input type="radio" name="display-by" value="books:latest" onClick={sortBy} />
+              <label className="ml-1">by Latest</label>
+            </div>
+          </div>
+        </div>
+      </Segment>
       <div>
         {loading == true ? (
-          <></>
+          <>
+            <img src="/loader.gif" alt="" className="loader" />
+          </>
         ) : (
           <>
             {books != [] ? (
