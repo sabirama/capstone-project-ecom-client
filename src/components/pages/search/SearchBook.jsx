@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Segment } from "semantic-ui-react";
+import { Segment, Grid } from "semantic-ui-react";
 import Search from "../../subcomponents/Search";
 import Get from "../../lib/http/get";
 import BookDisplay from "../../subcomponents/BookDisplay";
@@ -7,16 +7,21 @@ import BookDisplay from "../../subcomponents/BookDisplay";
 const SearchBook = () => {
   const [searchVal, setSeatchVal] = useState("");
   const [searchBookResult, setSearchBookResult] = useState("");
-  const [searchAuthorResult, setSearchAuthorResult] = useState("");
+  const [searching, setSearching] = useState(false);
+  const [error, setError] = useState(null);
 
   Search(setSeatchVal);
 
   async function searchFor() {
-    await Get(`search?val=${searchVal}`).then((e) => {
-      setSearchAuthorResult(e.author.data);
-      setSearchBookResult(e.books.data);
-    });
-    console.log(searchBookResult);
+    setSearching(true);
+    try {
+      const data = await Get(`search?val=${searchVal}&page_size=30`);
+      setSearchBookResult(data.books);
+      console.log(data);
+    } catch (e) {
+      setError(e);
+    }
+    setSearching(false);
   }
 
   useEffect(() => {
@@ -24,25 +29,30 @@ const SearchBook = () => {
   }, [searchVal]);
 
   useEffect(() => {
-    console.log(searchBookResult);
-    console.log(searchAuthorResult);
-  }, [searchAuthorResult, searchBookResult]);
+    console.log(["books", searchBookResult]);
+  }, [searchBookResult]);
 
   return (
     <>
-      <div>{searchVal == "" ? <></> : <h3>Search results for keyword ({searchVal}).</h3>}</div>
-      <Segment>
-        {searchBookResult == [] ? (
-          <>SEARCHING</>
-        ) : (
-          <>
-            {/* {searchBookResult.map((book, index) => {
-              return <BookDisplay key={index} book={book} />;
-            })} */}
-          </>
-        )}
-      </Segment>
-      <Segment>{searchAuthorResult == [] ? <>SEARCHING</> : <>GOOD</>}</Segment>
+      <div>
+        <Segment>
+          {searching ? (
+            <>
+              Searching for books with keyword <strong>{searchVal}</strong>.
+            </>
+          ) : searchBookResult ? (
+            <Grid stackable columns={4}>
+              <Grid.Row className="book-row">
+                {searchBookResult.map((book, index) => {
+                  return <BookDisplay key={index} book={book} />;
+                })}
+              </Grid.Row>
+            </Grid>
+          ) : error ? (
+            <>Sorry Were Having Trouble With Your Search Request.</>
+          ) : null}
+        </Segment>
+      </div>
     </>
   );
 };
