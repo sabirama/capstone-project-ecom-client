@@ -88,12 +88,12 @@ const Header = () => {
   }, []);
 
   return (
-    <>
+    <div className="header-container">
       <button className="nav-button ui" onClick={toggleNav}>
         <Icon name="bars" />
       </button>
-      <Menu className="container">
-        <Menu.Item as={Link} to="/" className="home links" onClick={closeNav}>
+      <Menu className="container home">
+        <Menu.Item as={Link} to="/*" className="links" onClick={closeNav}>
           <Icon name="home" />
           <p className="hover-color-primary">Home</p>
         </Menu.Item>
@@ -134,7 +134,7 @@ const Header = () => {
           <p className="hover-color-primary">Log out</p>
         </Menu.Item>
       </Menu>
-    </>
+    </div>
   );
 };
 

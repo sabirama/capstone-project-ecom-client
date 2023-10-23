@@ -1,9 +1,9 @@
-import Home from "../../pages/home/Home";
 import User from "../../pages/user/User";
 import About from "../../pages/about/About";
 import Books from "../../pages/books/Books";
 import Authentication from "../../pages/authentication-form/Authentication";
 import SearchBook from "../../pages/search/SearchBook";
+import Home from "../../pages/home/Home";
 
 const mainroutes = [
   {

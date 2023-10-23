@@ -26,6 +26,7 @@
   .nav-button {
     position: fixed;
     right: 1rem;
+    top: 1rem;
     border-radius: 0.25rem;
     padding: 0.75rem;
     background: white;
@@ -33,8 +34,12 @@
     z-index: 2;
   }
 
-  .header {
-    height: 100px;
+  .header-container {
+    position: fixed;
+    display: flex;
+    height: fit-content;
+    width: calc(90% - 65px);
+    z-index: 10;
   }
 
   .hidden {
@@ -58,16 +63,22 @@
 }
 
 @media screen and (min-width: 768px) {
-  .header {
+  .header-container {
     justify-content: space-between;
     display: flex;
     padding: 1rem 0;
+    width: 100%;
   }
 
   .home {
-    justify-content: space;
+    justify-content: flex-start !important;
+  }
+
+  .home a {
+    justify-content: flex-start !important;
     width: 100%;
   }
+
   .ui.nav-bar {
     width: max-content !important;
     padding-left: 1rem !important;

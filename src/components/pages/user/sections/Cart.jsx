@@ -1,12 +1,22 @@
 import { useEffect, useState } from "react";
+import { Segment } from "semantic-ui-react";
 import Get from "../../../lib/http/get";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
-  const [userCart, setUserCart] = useState([]);
+  const [cart, setCart] = useState([]);
+  const [items, setItems] = useState([]);
   const user = sessionStorage.getItem("user_id");
-  function getCart() {
-    const data = Get(`cart-user/${user}`);
-    setUserCart(data);
+
+  async function getCart() {
+    const data = await Get(`cart-user/${user}`);
+    setCart(data);
+  }
+
+  async function getItems() {
+    const data = await Get(`order-items:user/${cart.id}`);
+    setItems(data);
+    console.log("got items");
   }
 
   useEffect(() => {
@@ -14,9 +24,35 @@ const Cart = () => {
   }, []);
 
   useEffect(() => {
-    console.log(userCart);
-  }, [userCart]);
-  return <div>Cart</div>;
+    getItems();
+  }, [cart]);
+
+  function logger() {
+    console.log(items.order_items[0]);
+  }
+
+  return (
+    <>
+      <button onClick={logger}> TEst</button>
+      {items.order_items != null ? (
+        <>
+          <Segment className="container">
+            {items.order_items.map((item, index) => {
+              return (
+                <Segment key={index} className="container flex content-space-between">
+                  <Link to={`/id/${item.book[0].id}`}>{item.book[0].title}</Link>
+                  <h5>Quantity: {item.quantity}</h5>
+                  <h5>Total:{item.price_total} Php</h5>
+                </Segment>
+              );
+            })}
+          </Segment>
+        </>
+      ) : (
+        <></>
+      )}
+    </>
+  );
 };
 
 export default Cart;

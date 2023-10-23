@@ -15,7 +15,10 @@ const IndividualBook = (prop) => {
   }
 
   useEffect(() => {
-    setPath(prop.book.book_image[0].image_path);
+    if (prop.book.book_image[0] != null) {
+      setPath(import.meta.env.VITE_SOURCE_URL + prop.book.book_image[0].image_path);
+    }
+
     window.addEventListener("addedBookReview", () => {
       getReviews();
     });
@@ -27,7 +30,7 @@ const IndividualBook = (prop) => {
   return (
     <>
       <Segment className="p-1 container flex-col width-100">
-        <img src={import.meta.env.VITE_SOURCE_URL + path} alt="book cover" className="book-cover" />
+        <img src={path} alt="book cover" className="book-cover" />
         <Segment className="py-1 container">
           <div className="width-100">
             <h1>{prop.book.title}</h1>

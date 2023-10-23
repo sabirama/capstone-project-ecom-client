@@ -24,7 +24,7 @@ const Home = () => {
   const latestRoutes = latest.map((book) => {
     return {
       name: book.title,
-      path: `id/${book.id}`,
+      path: `/books/id/${book.id}`,
       element: <IndividualBook book={book} />,
     };
   });
@@ -36,10 +36,9 @@ const Home = () => {
 
   return (
     <>
-      {RouteMapping(latestRoutes, [])}
-
       <Routes>
-        <Route path="/" element={<MainPage latest={latest} reviews={reviews} />} />
+        {RouteMapping(latestRoutes, [])}
+        <Route path="*/" element={<MainPage latest={latest} reviews={reviews} />} />
       </Routes>
     </>
   );

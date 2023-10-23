@@ -1,4 +1,5 @@
 import { Segment } from "semantic-ui-react";
+import { Routes } from "react-router-dom";
 import { LinkMapping, RouteMapping } from "../../subcomponents/mapping";
 import userRoutes from "../../lib/routes/pageroutes/userroutes";
 
@@ -14,7 +15,7 @@ const User = () => {
         </div>
       </Segment>
 
-      {RouteMapping(userRoutes, [])}
+      <Routes>{RouteMapping(userRoutes, [])}</Routes>
     </>
   );
 };

@@ -55,7 +55,7 @@ const LogIn = () => {
       window.location.href = "/";
       setIsLoggingIn(false);
     } else {
-      console.log(authorize);
+      return () => {};
     }
     setUsername(localStorage.getItem("username"));
     setPassword(localStorage.getItem("password"));
@@ -78,7 +78,7 @@ const LogIn = () => {
         <h1>Log In</h1>
 
         <Form className="form log-in">
-          <Form.Field control={Input} label="Username" placeholder="Username" onChange={userChange} />
+          <Form.Field control={Input} label="Username" placeholder="Username" required={true} onChange={userChange} />
 
           <Form.Field
             control={Input}
@@ -86,6 +86,7 @@ const LogIn = () => {
             label="Password"
             placeholder="Password"
             autoComplete="on"
+            required={true}
             onChange={passChange}
           />
 

@@ -17,7 +17,7 @@ const Books = () => {
 
   //get books from server
   async function getBooks() {
-    const data = await Get(`books?page_size=20&page=${pageValue}`);
+    const data = await Get(`books?page_size=10&page=${pageValue}`);
     if (data.data) {
       setBooks(data.data);
       setPages(data.meta.links);
@@ -72,7 +72,7 @@ const Books = () => {
         <>
           {books != [] ? (
             <>
-              {RouteMapping(bookRoutes, [])}
+              <Routes>{RouteMapping(bookRoutes, [])}</Routes>
               <Routes>
                 <Route path="*" element={<BookPages books={books} />} />
               </Routes>

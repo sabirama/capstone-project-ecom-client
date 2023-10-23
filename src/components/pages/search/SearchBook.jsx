@@ -16,6 +16,7 @@ const SearchBook = () => {
       setSearchAuthorResult(e.author.data);
       setSearchBookResult(e.books.data);
     });
+    console.log(searchBookResult);
   }
 
   useEffect(() => {
@@ -35,9 +36,9 @@ const SearchBook = () => {
           <>SEARCHING</>
         ) : (
           <>
-            {searchBookResult.map((book, index) => {
+            {/* {searchBookResult.map((book, index) => {
               return <BookDisplay key={index} book={book} />;
-            })}
+            })} */}
           </>
         )}
       </Segment>

@@ -86,7 +86,7 @@ const Register = () => {
         sessionStorage.setItem("token", getData.token);
         sessionStorage.setItem("user_id", getData.user.id);
       }
-
+      sessionStorage.setItem("register", true);
       window.dispatchEvent(new Event("loggedIn"));
       window.location.href = "/";
 
@@ -99,31 +99,56 @@ const Register = () => {
       <h1>Register</h1>
       <Form className="form register">
         <Form.Group widths="equal">
-          <Form.Field control={Input} label="First name" placeholder="First name" onChange={firstnameChange} />
-          <Form.Field control={Input} label="Last name" placeholder="Last name" onChange={lastnameChange} />
+          <Form.Field
+            control={Input}
+            label="First name"
+            placeholder="First name"
+            required={true}
+            onChange={firstnameChange}
+          />
+          <Form.Field
+            control={Input}
+            label="Last name"
+            placeholder="Last name"
+            required={true}
+            onChange={lastnameChange}
+          />
         </Form.Group>
 
         <Form.Group widths="equal">
-          <Form.Field control={Input} label="Username" placeholder="Create a username" onChange={userChange} />
-          <Form.Field control={Input} label="Email" placeholder="Email" onChange={emailChange} />
+          <Form.Field
+            control={Input}
+            label="Username"
+            placeholder="Create a username"
+            required={true}
+            onChange={userChange}
+          />
+          <Form.Field
+            control={Input}
+            label="Email"
+            type="email"
+            placeholder="Email"
+            required={true}
+            onChange={emailChange}
+          />
         </Form.Group>
 
         <Form.Group widths="equal">
-          <Form.Field control={Input} label="Birthday" type="date" onChange={birthChange} />
+          <Form.Field control={Input} label="Birthday" type="date" required={true} onChange={birthChange} />
         </Form.Group>
 
         <strong>Gender</strong>
         <Form.Group widths="equal">
           <span className="form-element">
-            <input type="radio" name="gender" value="male" onChange={genderChange} />
+            <input type="radio" name="gender" value="male" required={true} onChange={genderChange} />
             <label>Male</label>
           </span>
           <span className="form-element">
-            <input type="radio" name="gender" value="Female" onChange={genderChange} />
+            <input type="radio" name="gender" value="Female" required={true} onChange={genderChange} />
             <label>Female</label>
           </span>
           <span className="form-element">
-            <input type="radio" name="gender" value="others" onChange={genderChange} />
+            <input type="radio" name="gender" value="others" required={true} onChange={genderChange} />
             <label>Others</label>
           </span>
           <span className="form-element">
@@ -138,6 +163,7 @@ const Register = () => {
             type="password"
             label="Password"
             placeholder="Password"
+            required={true}
             onChange={passChange}
             autoComplete="on"
           />
@@ -146,6 +172,7 @@ const Register = () => {
             type="password"
             label="Confirm Password"
             placeholder="Confirm Password"
+            required={true}
             onChange={confirmpassChange}
             autoComplete="on"
           />
@@ -169,7 +196,7 @@ const Register = () => {
         {authorize == true ? (
           <>Please input your username and password</>
         ) : (
-          <>Wrong username or password. Please input your username and password again.</>
+          <>Wrong credentials. Please input your details again.</>
         )}
       </Segment>
     </Segment>
