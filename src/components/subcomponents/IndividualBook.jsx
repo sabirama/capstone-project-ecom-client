@@ -7,15 +7,15 @@ import BookReviewSection from "./BookReviewSection";
 
 const IndividualBook = (prop) => {
   const [reviews, setReviews] = useState([]);
-  function logger() {
-    console.log(prop);
-  }
+  const [path, setPath] = useState("");
+
   async function getReviews() {
     const data = await Get(`book-reviews/book?book_id=${prop.book.id}`);
     setReviews(data.book_reviews);
   }
 
   useEffect(() => {
+    setPath(prop.book.book_image[0].image_path);
     window.addEventListener("addedBookReview", () => {
       getReviews();
     });
@@ -26,17 +26,8 @@ const IndividualBook = (prop) => {
 
   return (
     <>
-      <button onClick={logger}>TEST</button>
       <Segment className="p-1 container flex-col width-100">
-        <img
-          src={
-            prop.book.book_image == undefined || []
-              ? ""
-              : import.meta.env.VITE_SOURCE_URL + prop.book.book_image[0].image_path
-          }
-          alt="book cover"
-          className="book-cover"
-        />
+        <img src={import.meta.env.VITE_SOURCE_URL + path} alt="book cover" className="book-cover" />
         <Segment className="py-1 container">
           <div className="width-100">
             <h1>{prop.book.title}</h1>
