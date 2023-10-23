@@ -29,7 +29,11 @@ const IndividualBook = (prop) => {
       <button onClick={logger}>TEST</button>
       <Segment className="p-1 container flex-col width-100">
         <img
-          src={prop.book.book_image ? import.meta.env.VITE_SOURCE_URL + prop.book.book_image[0].image_path : ""}
+          src={
+            prop.book.book_image == undefined || []
+              ? ""
+              : import.meta.env.VITE_SOURCE_URL + prop.book.book_image[0].image_path
+          }
           alt="book cover"
           className="book-cover"
         />
