@@ -1,5 +1,5 @@
 import { Routes } from "react-router-dom";
-import { LinkMapping, RouteMapping } from "../../subcomponents/mapping";
+import { LinkMapping, RouteMapping } from "../../lib/mapping";
 import aboutroutes from "../../lib/routes/pageroutes/aboutroutes";
 import { Segment } from "semantic-ui-react";
 

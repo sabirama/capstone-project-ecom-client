@@ -8,7 +8,7 @@ import Home from "../../pages/home/Home";
 const mainroutes = [
   {
     name: "HOME",
-    path: "/*",
+    path: "*",
     element: <Home />,
   },
   {

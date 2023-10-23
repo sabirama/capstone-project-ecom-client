@@ -1,5 +1,5 @@
 import { Routes } from "react-router-dom";
-import { RouteMapping } from "../../subcomponents/mapping";
+import { RouteMapping } from "../../lib/mapping";
 import authroute from "../../lib/routes/pageroutes/authroute";
 
 import "./Authentication.css";

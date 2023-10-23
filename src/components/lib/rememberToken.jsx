@@ -1,5 +1,5 @@
 const RememberToken = () => {
-  //check for token in local storage
+  //check for remember option in local storage
   const token = localStorage.getItem("token");
   if (token != null || token != "null" || token != "undefined" || token != "") {
     try {

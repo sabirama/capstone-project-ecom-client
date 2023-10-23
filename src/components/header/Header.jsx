@@ -93,7 +93,7 @@ const Header = () => {
         <Icon name="bars" />
       </button>
       <Menu className="container home">
-        <Menu.Item as={Link} to="/*" className="links" onClick={closeNav}>
+        <Menu.Item as={Link} to="/" className="links" onClick={closeNav}>
           <Icon name="home" />
           <p className="hover-color-primary">Home</p>
         </Menu.Item>

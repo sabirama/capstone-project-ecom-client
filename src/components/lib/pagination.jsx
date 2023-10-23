@@ -8,21 +8,17 @@ const Pagination = (pages, prefix, pageSetter) => {
     <div className="container flex">
       {pages.map((page, index) => {
         if (index == 0) {
-          return (
-            <Link key={index} to={`/${prefix}`} name={index} onClick={setPage} className="pagination-link box-accent">
-              1
-            </Link>
-          );
+          return;
         } else {
           return (
             <Link
               key={index}
-              to={`/${prefix}/${index + 1}`}
-              name={index}
+              to={`/${prefix}/${index}`}
+              name={page.label}
               onClick={setPage}
               className="pagination-link box-accent"
             >
-              {index + 1}
+              {index}
             </Link>
           );
         }

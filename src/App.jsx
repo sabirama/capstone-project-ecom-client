@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Routes } from "react-router-dom";
-import { RouteMapping } from "./components/subcomponents/mapping";
+import { RouteMapping } from "./components/lib/mapping";
 import mainroutes from "./components/lib/routes/mainroutes";
 import Post from "./components/lib/http/post";
 import Header from "./components/header/Header";

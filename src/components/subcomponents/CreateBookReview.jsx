@@ -17,6 +17,9 @@ const CreateBookReview = (prop) => {
   }
 
   async function postReview() {
+    if (sessionStorage.getItem("user_id") == null) {
+      //
+    }
     await Post("/book-reviews", postData);
     window.dispatchEvent(new Event("addedBookReview"));
   }

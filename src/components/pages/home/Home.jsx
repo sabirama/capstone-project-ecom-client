@@ -1,10 +1,10 @@
 /* eslint-disable react/no-unescaped-entities */
 import { useEffect, useState } from "react";
-import { RouteMapping } from "../../subcomponents/mapping";
+import { RouteMapping } from "../../lib/mapping";
 import { Routes, Route } from "react-router-dom";
 import MainPage from "./sections/MainPage";
 import request from "../../lib/http/request";
-import IndividualBook from "../../subcomponents/IndividualBook";
+import IndividualBook from "../../subcomponents/IndividualBook/IndividualBook";
 import "./Home.css";
 
 const Home = () => {
@@ -38,7 +38,7 @@ const Home = () => {
     <>
       <Routes>
         {RouteMapping(latestRoutes, [])}
-        <Route path="*/" element={<MainPage latest={latest} reviews={reviews} />} />
+        <Route path="/" element={<MainPage latest={latest} reviews={reviews} />} />
       </Routes>
     </>
   );

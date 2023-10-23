@@ -2,11 +2,11 @@
 import { Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Segment } from "semantic-ui-react";
-import { RouteMapping } from "../../subcomponents/mapping";
+import { RouteMapping } from "../../lib/mapping";
 import Get from "../../lib/http/get";
 import BookPages from "./sections/BookPages";
-import Pagination from "../../subcomponents/pagination";
-import IndividualBook from "../../subcomponents/IndividualBook";
+import Pagination from "../../lib/pagination";
+import IndividualBook from "../../subcomponents/IndividualBook/IndividualBook";
 
 import "./Books.css";
 
@@ -14,16 +14,22 @@ const Books = () => {
   const [books, setBooks] = useState([]);
   const [pages, setPages] = useState([]);
   const [pageValue, setPageValue] = useState(1);
+  const [loading, setLoading] = useState(false);
+  const [sort, setSort] = useState("books");
+
+  function sortBy(e) {
+    setSort(e.target.value);
+    console.log(sort);
+  }
 
   //get books from server
   async function getBooks() {
-    const data = await Get(`books?page_size=10&page=${pageValue}`);
+    const data = await Get(`${sort}?page=${pageValue}&page_size=20`);
     if (data.data) {
       setBooks(data.data);
       setPages(data.meta.links);
-    } else {
-      setBooks([]);
     }
+    setLoading(false);
   }
 
   const bookRoutes = books.map((book) => {
@@ -34,11 +40,13 @@ const Books = () => {
   });
 
   useEffect(() => {
+    setLoading(true);
     getBooks();
-  }, [pageValue]);
+  }, [pageValue, sort]);
 
   return (
     <>
+      <Routes>{RouteMapping(bookRoutes, [])}</Routes>
       {books != [] ? (
         <>
           <Segment className="container">
@@ -46,41 +54,38 @@ const Books = () => {
               <h1>Books</h1>
               <div className="px-1 check-group">
                 <div className="ml-2">
-                  <input type="radio" name="display-by" />
+                  <input type="radio" name="display-by" value="books:name" onClick={sortBy} />
                   <label className="ml-1">by Name</label>
                 </div>
                 <div className="ml-2">
-                  <input type="radio" name="display-by" />
+                  <input type="radio" name="display-by" value="books:latest" onClick={sortBy} />
                   <label className="ml-1">by Latest</label>
-                </div>
-                <div className="ml-2">
-                  <input type="radio" name="display-by" />
-                  <label className="ml-1">by Author</label>
-                </div>
-                <div className="ml-2">
-                  <input type="radio" name="display-by" />
-                  <label className="ml-1">by Genre</label>
                 </div>
               </div>
             </div>
           </Segment>
         </>
       ) : (
-        <>Oops! we are experiencing some errors with our server.</>
+        <></>
       )}
+
       <div>
-        <>
-          {books != [] ? (
-            <>
-              <Routes>{RouteMapping(bookRoutes, [])}</Routes>
-              <Routes>
-                <Route path="*" element={<BookPages books={books} />} />
-              </Routes>
-            </>
-          ) : (
-            <>PROBLEM LOADNG BOOKS </>
-          )}
-        </>
+        {loading == true ? (
+          <></>
+        ) : (
+          <>
+            {books != [] ? (
+              <>
+                <Routes>
+                  <Route path="*" element={<BookPages books={books} />} />
+                  {RouteMapping}
+                </Routes>
+              </>
+            ) : (
+              <></>
+            )}
+          </>
+        )}
       </div>
       <Segment>{books != [] ? <>{Pagination(pages, "books", setPageValue)}</> : <>no links found</>}</Segment>
     </>
