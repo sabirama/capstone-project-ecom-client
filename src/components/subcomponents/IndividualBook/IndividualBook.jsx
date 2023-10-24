@@ -18,31 +18,7 @@ const IndividualBook = () => {
   const [genre, setGenre] = useState("");
   const [buyNow, setBuyNow] = useState(false);
   const [cartItem, setCartItem] = useState(false);
-  const bookId = sessionStorage.getItem("current_id");
-
-  function setItems() {
-    setChangeDisplay(!changeDisplay);
-  }
-
-  useEffect(() => {
-    window.addEventListener("displayBook", function () {
-      setItems();
-    });
-
-    return () => {
-      window.removeEventListener("dispayBook", function () {});
-    };
-  }, [changeDisplay]);
-
-  useEffect(() => {
-    setTitle(sessionStorage.getItem("current_title"));
-    setAuthor(sessionStorage.getItem("current_author"));
-    setDetail(sessionStorage.getItem("current_detail"));
-    setPrice(sessionStorage.getItem("current_price"));
-    setPath(sessionStorage.getItem("current_image"));
-    setGenre(sessionStorage.getItem("current_genre"));
-    getReviews();
-  }, [changeDisplay]);
+  const bookId = sessionStorage.getItem("current_book");
 
   async function getReviews() {
     const data = await Get(`book-reviews/book?book_id=${bookId}`);
@@ -58,7 +34,38 @@ const IndividualBook = () => {
     setCartItem(!cartItem);
   }
 
-  useEffect(() => {}, [reviews]);
+  useEffect(() => {
+    window.addEventListener("displayBook", function () {
+      setChangeDisplay(true);
+    });
+    return () => {
+      window.removeEventListener("dispayBook", function () {});
+    };
+  }, []);
+
+  useEffect(() => {
+    setTitle(sessionStorage.getItem("current_title"));
+    setAuthor(sessionStorage.getItem("current_author"));
+    setDetail(sessionStorage.getItem("current_detail"));
+    setPrice(sessionStorage.getItem("current_price"));
+    setPath(sessionStorage.getItem("current_image"));
+    setGenre(sessionStorage.getItem("current_genre"));
+    getReviews();
+    window.addEventListener("displayBook", function () {
+      setChangeDisplay(true);
+    });
+    window.addEventListener("addedBookReview", function () {
+      setChangeDisplay(true);
+    });
+    return () => {
+      window.removeEventListener("dispayBook", function () {});
+      window.removeEventListener("addedBookReview", function () {});
+    };
+  }, [changeDisplay]);
+
+  useEffect(() => {
+    setChangeDisplay(false);
+  }, [reviews]);
 
   return (
     <>
@@ -96,7 +103,7 @@ const IndividualBook = () => {
               </Segment>
             </Menu>
             <Segment>
-              {reviews.length != 0 ? (
+              {changeDisplay == false ? (
                 <>
                   <Segment>
                     <h2>Reviews</h2>

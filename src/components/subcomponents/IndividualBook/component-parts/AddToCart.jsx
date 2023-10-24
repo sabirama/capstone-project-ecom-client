@@ -21,7 +21,8 @@ const AddToCart = (prop) => {
   //adding items to cart
   async function addToCart() {
     prop.setter();
-    await Post(`/order-items`, { PostData });
+    console.log(PostData);
+    await Post(`/order-items`, PostData);
   }
 
   return (

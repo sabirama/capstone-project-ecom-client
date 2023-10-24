@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const Cart = () => {
   const [cart, setCart] = useState([]);
   const [items, setItems] = useState([]);
-  const user = sessionStorage.getItem("user_id");
+  const user = sessionStorage.getItem("cart_id");
 
   async function getCart() {
     const data = await Get(`cart-user/${user}`);
@@ -26,10 +26,8 @@ const Cart = () => {
     getItems();
   }, [cart]);
 
-
   return (
     <>
-
       {items.order_items != null ? (
         <>
           <Segment className="container">

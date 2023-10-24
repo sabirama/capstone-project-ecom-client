@@ -21,7 +21,6 @@ function App() {
   async function getCart() {
     const data = await Get(`cart-user/${userId}`);
     setCartId(data);
-    sessionStorage.setItem("cart_id", cartId.id);
   }
 
   useEffect(() => {
@@ -32,18 +31,14 @@ function App() {
     } else {
       getCart();
     }
+    sessionStorage.setItem("cart_id", cartId.id);
   }, []);
 
   useEffect(() => {
-    if (cartId == undefined) {
-      getCart();
-    }
+    getCart();
     sessionStorage.setItem("cart_id", cartId.id);
   }, [cartId]);
 
-  function logger() {
-    console.log(cartId);
-  }
   return (
     <>
       <header className="container">
@@ -53,7 +48,7 @@ function App() {
       <section>
         <Routes>{RouteMapping(mainroutes, [])}</Routes>
       </section>
-      <button onClick={logger}>test</button>
+
       <footer className="footer py-1">
         <Footer />
       </footer>
