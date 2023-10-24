@@ -35,15 +35,6 @@ const IndividualBook = () => {
   }
 
   useEffect(() => {
-    window.addEventListener("displayBook", function () {
-      setChangeDisplay(true);
-    });
-    return () => {
-      window.removeEventListener("dispayBook", function () {});
-    };
-  }, []);
-
-  useEffect(() => {
     setTitle(sessionStorage.getItem("current_title"));
     setAuthor(sessionStorage.getItem("current_author"));
     setDetail(sessionStorage.getItem("current_detail"));

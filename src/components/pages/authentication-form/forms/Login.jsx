@@ -15,13 +15,6 @@ const LogIn = () => {
     password: password,
   };
 
-  function userChange(e) {
-    setUsername(e.target.value);
-  }
-
-  function passChange(e) {
-    setPassword(e.target.value);
-  }
   function rememberMe() {
     setRremember(!remember);
   }
@@ -75,7 +68,13 @@ const LogIn = () => {
         <h1>Log In</h1>
 
         <Form className="form log-in">
-          <Form.Field control={Input} label="Username" placeholder="Username" required={true} onChange={userChange} />
+          <Form.Field
+            control={Input}
+            label="Username"
+            placeholder="Username"
+            required={true}
+            onChange={(e) => setUsername(e.target.value)}
+          />
 
           <Form.Field
             control={Input}
@@ -84,7 +83,7 @@ const LogIn = () => {
             placeholder="Password"
             autoComplete="on"
             required={true}
-            onChange={passChange}
+            onChange={(e) => setPassword(e.target.value)}
           />
 
           <Form.Group className="form-submit">

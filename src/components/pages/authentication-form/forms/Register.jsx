@@ -7,7 +7,7 @@ import Post from "../../../lib/http/post";
 const Register = () => {
   const [username, setUsername] = useState("");
   const [firstname, setfirstName] = useState("");
-  const [lastname, setlastName] = useState("");
+  const [lastname, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [gender, setGender] = useState("male");
   const [birthday, setBirthday] = useState("");
@@ -15,7 +15,7 @@ const Register = () => {
   const [confirmPassword, setconfirmPassword] = useState("");
   const [getData, setGetData] = useState([]);
   const [isLoggingIn, setIsLoggingIn] = useState(false);
-  const [remember, setRremember] = useState(false);
+  const [remember, setRemember] = useState(false);
   const [authorize, setAuthorize] = useState(true);
   const postData = {
     first_name: firstname,
@@ -28,40 +28,8 @@ const Register = () => {
     password_confirmation: confirmPassword,
   };
 
-  function firstnameChange(e) {
-    setfirstName(e.target.value);
-  }
-
-  function lastnameChange(e) {
-    setlastName(e.target.value);
-  }
-
-  function emailChange(e) {
-    setEmail(e.target.value);
-  }
-
-  function userChange(e) {
-    setUsername(e.target.value);
-  }
-
-  function genderChange(e) {
-    setGender(e.target.value);
-  }
-
-  function birthChange(e) {
-    setBirthday(e.target.value);
-  }
-
-  function passChange(e) {
-    setPassword(e.target.value);
-  }
-
-  function confirmpassChange(e) {
-    setconfirmPassword(e.target.value);
-  }
-
   function rememberMe() {
-    setRremember(!remember);
+    setRemember(!remember);
   }
 
   async function logIn() {
@@ -95,6 +63,7 @@ const Register = () => {
 
   return (
     <Segment>
+      <button onClick={console.log(postData)}>test</button>
       <h1>Register</h1>
       <Form className="form register">
         <Form.Group widths="equal">
@@ -103,14 +72,14 @@ const Register = () => {
             label="First name"
             placeholder="First name"
             required={true}
-            onChange={firstnameChange}
+            onChange={(e) => setfirstName(e.target.value)}
           />
           <Form.Field
             control={Input}
             label="Last name"
             placeholder="Last name"
             required={true}
-            onChange={lastnameChange}
+            onChange={(e) => setLastName(e.target.value)}
           />
         </Form.Group>
 
@@ -120,7 +89,7 @@ const Register = () => {
             label="Username"
             placeholder="Create a username"
             required={true}
-            onChange={userChange}
+            onChange={(e) => setUsername(e.target.value)}
           />
           <Form.Field
             control={Input}
@@ -128,30 +97,54 @@ const Register = () => {
             type="email"
             placeholder="Email"
             required={true}
-            onChange={emailChange}
+            onChange={(e) => setEmail(e.target.value)}
           />
         </Form.Group>
 
         <Form.Group widths="equal">
-          <Form.Field control={Input} label="Birthday" type="date" required={true} onChange={birthChange} />
+          <Form.Field
+            control={Input}
+            label="Birthday"
+            type="date"
+            required={true}
+            onChange={(e) => setBirthday(e.target.value)}
+          />
         </Form.Group>
 
         <strong>Gender</strong>
         <Form.Group widths="equal">
           <span className="form-element">
-            <input type="radio" name="gender" value="male" required={true} onChange={genderChange} />
+            <input
+              type="radio"
+              name="gender"
+              value="male"
+              required={true}
+              onChange={(e) => setGender(e.target.value)}
+            />
             <label>Male</label>
           </span>
           <span className="form-element">
-            <input type="radio" name="gender" value="Female" required={true} onChange={genderChange} />
+            <input
+              type="radio"
+              name="gender"
+              value="Female"
+              required={true}
+              onChange={(e) => setGender(e.target.value)}
+            />
             <label>Female</label>
           </span>
           <span className="form-element">
-            <input type="radio" name="gender" value="others" required={true} onChange={genderChange} />
+            <input
+              type="radio"
+              name="gender"
+              value="others"
+              required={true}
+              onChange={(e) => setGender(e.target.value)}
+            />
             <label>Others</label>
           </span>
           <span className="form-element">
-            <input type="radio" name="gender" value="prefer not to say" onChange={genderChange} />
+            <input type="radio" name="gender" value="prefer not to say" onChange={(e) => setGender(e.target.value)} />
             <label>Prefer not to say</label>
           </span>
         </Form.Group>
@@ -163,7 +156,7 @@ const Register = () => {
             label="Password"
             placeholder="Password"
             required={true}
-            onChange={passChange}
+            onChange={(e) => setPassword(e.target.value)}
             autoComplete="on"
           />
           <Form.Field
@@ -172,7 +165,7 @@ const Register = () => {
             label="Confirm Password"
             placeholder="Confirm Password"
             required={true}
-            onChange={confirmpassChange}
+            onChange={(e) => setconfirmPassword(e.target.value)}
             autoComplete="on"
           />
         </Form.Group>
