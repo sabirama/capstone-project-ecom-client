@@ -17,13 +17,20 @@ const Books = () => {
   const [loading, setLoading] = useState(false);
   const [sort, setSort] = useState("books");
 
+  const bookRoutes = books.map((book) => {
+    return {
+      path: `id/${book.id}`,
+      element: <IndividualBook book={book} />,
+    };
+  });
+
   function sortBy(e) {
     setSort(e.target.value);
   }
 
   //get books from server
   async function getBooks() {
-    const data = await Get(`${sort}?page=${pageValue}&page_size=20`);
+    const data = await Get(`${sort}?page=${pageValue}&page_size=12`);
 
     if (data.data) {
       setBooks(data.data);
@@ -31,13 +38,6 @@ const Books = () => {
     }
     setLoading(false);
   }
-
-  const bookRoutes = books.map((book) => {
-    return {
-      path: `id/${book.id}`,
-      element: <IndividualBook book={book} />,
-    };
-  });
 
   useEffect(() => {
     setLoading(true);
@@ -64,9 +64,9 @@ const Books = () => {
       </Segment>
       <div>
         {loading == true ? (
-          <>
+          <Segment>
             <img src="/loader.gif" alt="" className="loader" />
-          </>
+          </Segment>
         ) : (
           <>
             {books != [] ? (

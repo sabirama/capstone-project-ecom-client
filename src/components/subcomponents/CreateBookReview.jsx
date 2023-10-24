@@ -18,7 +18,7 @@ const CreateBookReview = (prop) => {
 
   async function postReview() {
     await Post("/book-reviews", postData);
-    window.dispatchEvent(new Event("addedBookReview"));
+    window.dispatchEvent(new Event("displayBook"));
   }
 
   const postData = {

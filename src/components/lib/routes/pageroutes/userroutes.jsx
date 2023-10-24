@@ -1,6 +1,6 @@
 import Profie from "../../../pages/user/sections/Profie";
-import Cart from "../../../pages/user/sections/Cart";
-import OrderHistory from "../../../pages/user/sections/OrderHistory";
+import Cart from "../../../pages/user/sections/cart/Cart";
+import OrderHistory from "../../../pages/user/sections/OrderHistory/OrderHistory";
 
 const userRoutes = [
   {

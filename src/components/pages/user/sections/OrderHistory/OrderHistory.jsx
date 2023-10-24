@@ -1,19 +1,24 @@
 import { useEffect, useState } from "react";
-import Get from "../../../lib/http/get";
+import { Link } from "react-router-dom";
+import Get from "../../../../lib/http/get";
 import OrderDetails from "./components/OrderDetails";
+import { Segment } from "semantic-ui-react";
 
 const OrderHistory = () => {
   const [orderHistory, setOrderHistory] = useState([]);
   const [orders, setOrders] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const user = sessionStorage.getItem("user_id");
 
   async function getOrders() {
-    const data = await Get(`orders/${user}`);
+    const data = await Get(`orders/${user}?page_size=20`);
     setOrderHistory(data.orders);
+    setLoading(false);
   }
 
   useEffect(() => {
+    setLoading(true);
     getOrders();
   }, [user]);
 
@@ -35,11 +40,28 @@ const OrderHistory = () => {
 
   return (
     <>
-      <div className="container flex-col width-90 m-auto">
-        {orders.map((order, index) => {
-          return <OrderDetails key={index} order={order} />;
-        })}
-      </div>
+      <Segment>
+        {loading == false ? (
+          <>
+            {orders.length != 0 ? (
+              <Segment className="container flex-col width-90 m-auto">
+                {orders.map((order, index) => {
+                  return <OrderDetails key={index} order={order} />;
+                })}
+              </Segment>
+            ) : (
+              <>
+                <div>No Orders</div>
+                <Link to="/books">ADD ITEMS</Link>
+              </>
+            )}
+          </>
+        ) : (
+          <>
+            <img src="/loader.gif" alt="" className="loader" />
+          </>
+        )}
+      </Segment>
     </>
   );
 };

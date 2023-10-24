@@ -11,6 +11,14 @@ const Home = () => {
   const [latest, setLatest] = useState([]);
   const [reviews, setReviews] = useState([]);
 
+  const latestRoutes = latest.map((book) => {
+    return {
+      name: book.title,
+      path: `id/${book.id}`,
+      element: <IndividualBook book={book} />,
+    };
+  });
+
   async function getLatest() {
     const { data } = await request.get("books:latest?page_size=10");
     setLatest(data.books);
@@ -20,14 +28,6 @@ const Home = () => {
     const { data } = await request.get("order-reviews?page_size=10");
     setReviews(data.order_review.data);
   }
-
-  const latestRoutes = latest.map((book) => {
-    return {
-      name: book.title,
-      path: `/books/id/${book.id}`,
-      element: <IndividualBook book={book} />,
-    };
-  });
 
   useEffect(() => {
     getLatest();

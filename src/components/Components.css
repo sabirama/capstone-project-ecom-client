@@ -86,3 +86,14 @@ input::-webkit-inner-spin-button {
   border-radius: 6px;
   box-shadow: 1px 1px 5px var(--dark);
 }
+
+.book-image {
+  height: 200px;
+  width: auto;
+  z-index: -1;
+  border-bottom: 2px solid black;
+}
+
+.image-display-container {
+  height: 200px;
+}

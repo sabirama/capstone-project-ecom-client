@@ -45,7 +45,7 @@ function App() {
         <Header />
       </header>
 
-      <section>
+      <section className="width-100">
         <Routes>{RouteMapping(mainroutes, [])}</Routes>
       </section>
 
