@@ -1,4 +1,4 @@
-import { Container, Segment } from "semantic-ui-react";
+import { Segment } from "semantic-ui-react";
 import Post from "../lib/http/post";
 
 const BookReviewSection = (prop) => {
@@ -12,13 +12,23 @@ const BookReviewSection = (prop) => {
   return (
     <>
       {console.log(prop.review)}
-      {prop.review != undefined ? (
-        <></>
-      ) : (
+      {
         <Segment>
-          <img src="/loader.gif" alt="" className="loader" />
+          <div>
+            <h5>{prop.review.user[0].username}</h5>
+            <p>{prop.review.book_reviews.body}</p>
+          </div>
+          <div>
+            {user == prop.review.user[0].id ? (
+              <>
+                <button onClick={deleteReview}>x</button>
+              </>
+            ) : (
+              <></>
+            )}
+          </div>
         </Segment>
-      )}
+      }
     </>
   );
 };

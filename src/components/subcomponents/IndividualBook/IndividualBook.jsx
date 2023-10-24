@@ -93,9 +93,7 @@ const IndividualBook = () => {
             <Segment>
               {changeDisplay == false ? (
                 <>
-                  <Segment>
-                    <h2>Reviews</h2>
-                  </Segment>
+                  <h2>Reviews</h2>
 
                   {reviews.map((review, index) => {
                     return (
