@@ -8,23 +8,25 @@ import BuyNowModal from "./component-parts/BuyNowModal";
 import AddToCart from "./component-parts/AddToCart";
 
 const IndividualBook = () => {
-  const [changeDisplay, setChangeDisplay] = useState(false);
   const [title, setTitle] = useState(sessionStorage.getItem("current_title"));
   const [author, setAuthor] = useState(sessionStorage.getItem("current_author"));
   const [detail, setDetail] = useState(sessionStorage.getItem("current_detail"));
   const [price, setPrice] = useState(sessionStorage.getItem("current_price"));
+  const [path, setPath] = useState(sessionStorage.getItem("current_image"));
+  const [genre, setGenre] = useState(sessionStorage.getItem("current_genre"));
   const [reviews, setReviews] = useState([]);
-  const [path, setPath] = useState("");
-  const [genre, setGenre] = useState("");
   const [buyNow, setBuyNow] = useState(false);
   const [cartItem, setCartItem] = useState(false);
+  const [loading, setLoading] = useState(false);
   const bookId = sessionStorage.getItem("current_book");
 
   async function getReviews() {
-    setChangeDisplay(true);
-    const data = await Get(`book-reviews/book?book_id=${bookId}`);
-    setReviews(data.book_reviews);
-    setChangeDisplay(false);
+    console.log("getting reviews");
+    await Get(`book-reviews/book?book_id=${bookId}`).then((e) => {
+      console.log("revv");
+      setReviews(e);
+    });
+    setLoading(false);
   }
 
   function toggleBuy() {
@@ -37,7 +39,6 @@ const IndividualBook = () => {
   }
 
   useEffect(() => {
-    getReviews();
     window.addEventListener("displayBook", async function () {
       setTitle(sessionStorage.getItem("current_title"));
       setAuthor(sessionStorage.getItem("current_author"));
@@ -47,13 +48,18 @@ const IndividualBook = () => {
       setGenre(sessionStorage.getItem("current_genre"));
     });
     window.addEventListener("addedBookReview", function () {
-      getReviews();
+      setLoading(true);
     });
+
     return () => {
-      window.removeEventListener("dispayBook", function () {});
+      window.removeEventListener("displayBook", function () {});
       window.removeEventListener("addedBookReview", function () {});
     };
   }, []);
+
+  useEffect(() => {
+    getReviews();
+  }, [loading]);
 
   return (
     <>
@@ -91,21 +97,27 @@ const IndividualBook = () => {
               </Segment>
             </Menu>
             <Segment>
-              {changeDisplay == false ? (
-                <>
-                  <h2>Reviews</h2>
+              <h2>Reviews</h2>
 
-                  {reviews.map((review, index) => {
-                    return (
-                      <div key={index} className="container py-1">
-                        <BookReviewSection review={review} />
-                      </div>
-                    );
-                  })}
+              {loading == true ? (
+                <>
+                  <img src="/loader.gif" alt="" className="loader" />
                 </>
               ) : (
                 <>
-                  <img src="/loader.gif" alt="" className="loader" />
+                  {reviews.length != 0 ? (
+                    <>
+                      {reviews.book_reviews.map((review, index) => {
+                        return (
+                          <div key={index} className="container py-1">
+                            <BookReviewSection review={review} />
+                          </div>
+                        );
+                      })}
+                    </>
+                  ) : (
+                    <></>
+                  )}
                 </>
               )}
             </Segment>

@@ -8,7 +8,6 @@ const BookDisplay = (prop) => {
   const [path, setPath] = useState("");
 
   function onClickHandler() {
-    window.dispatchEvent(new Event("displayBook"));
     sessionStorage.setItem("current_book", book.id);
     sessionStorage.setItem("current_title", book.title);
     sessionStorage.setItem("current_detail", book.book_details.body);
@@ -16,7 +15,7 @@ const BookDisplay = (prop) => {
     sessionStorage.setItem("current_author", book.book_details.author[0].pen_name);
     sessionStorage.setItem("current_image", path);
     sessionStorage.setItem("current_genre", genres);
-
+    window.dispatchEvent(new Event("displayBook"));
     scrollTo(top);
   }
 

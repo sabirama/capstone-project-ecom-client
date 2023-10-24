@@ -11,7 +11,6 @@ const BookReviewSection = (prop) => {
 
   return (
     <>
-      {console.log(prop.review)}
       {
         <Segment>
           <div>

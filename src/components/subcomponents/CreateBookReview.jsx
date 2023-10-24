@@ -32,16 +32,35 @@ const CreateBookReview = (prop) => {
     <>
       <Form className="container flex-col">
         <textarea className="width-100 flex" placeholder="Tell us more" value={reviewBody} onChange={bodyChange} />
-        <div>
-          <input type="radio" value={1} name="rating" onClick={createRate} />
-          <input type="radio" value={2} name="rating" onClick={createRate} />
-          <input type="radio" value={3} name="rating" onClick={createRate} />
-          <input type="radio" value={4} name="rating" onClick={createRate} />
-          <input type="radio" value={5} name="rating" onClick={createRate} />
+        <div className="flex  my-1 flex-end">
+          <div>
+            <input type="radio" id="star1" value={0} name="rating" onClick={createRate} className="star-radio" />
+            <label htmlFor="star1" className="s"></label>
+          </div>
+          <div>
+            <input type="radio" id="star2" value={1} name="rating" onClick={createRate} className="star-radio" />
+            <label htmlFor="star2" className="star-label"></label>
+          </div>
+          <div>
+            <input type="radio" id="star3" value={2} name="rating" onClick={createRate} className="star-radio" />
+            <label htmlFor="star3" className="star-label"></label>
+          </div>
+          <div>
+            <input type="radio" id="star4" value={3} name="rating" onClick={createRate} className="star-radio" />
+            <label htmlFor="star4" className="star-label"></label>
+          </div>
+          <div>
+            <input type="radio" id="star5" value={4} name="rating" onClick={createRate} className="star-radio" />
+            <label htmlFor="star5" className="star-label"></label>
+          </div>
+          <div>
+            <input type="radio" id="star6" value={5} name="rating" onClick={createRate} className="star-radio" />
+            <label htmlFor="star6" className="star-label"></label>
+          </div>
+          <button onClick={postReview} className="button">
+            Post Review
+          </button>
         </div>
-        <button onClick={postReview} className="button">
-          Post Review
-        </button>
       </Form>
     </>
   );

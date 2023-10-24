@@ -38,6 +38,7 @@
   }
 }
 
+/* item buy and cart  */
 .modal-button {
   margin: auto;
 }
@@ -95,5 +96,28 @@ input::-webkit-inner-spin-button {
 }
 
 .image-display-container {
-  height: 200px;
+  height: 200px; /* finx display container height */
+}
+
+input.star-radio {
+  display: none;
+}
+
+/* Style for the specific label associated with the "unique-radio" class */
+label.star-label {
+  cursor: pointer;
+  padding-left: 30px; /* Space for the star */
+}
+
+label.star-label:before {
+  content: "★"; /* Display a star character */
+  left: 0;
+  font-size: 24px; /* Adjust the size as needed */
+  line-height: 1;
+  transition: color 0.3s;
+}
+
+/* Change the star color when the specific radio button is checked */
+input.star-radio:checked + label.star-label:before {
+  color: gold;
 }

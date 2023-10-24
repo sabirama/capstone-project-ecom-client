@@ -20,21 +20,10 @@ const Footer = () => {
         </Container>
 
         <Container className="footer-links-container flex-col my-1">
-          <p>Browse Our Categories:</p>
-          <a href="#">Fiction</a>
-          <a href="#">Non-Fiction</a>
-          <a href="#">Bestsellers</a>
-          <a href="#">Science</a>
-          <a href="#">Romance</a>
-          <a href="#">Mystery</a>
-        </Container>
-
-        <Container className="footer-links-container flex-col my-1">
           <p>Quick Links:</p>
-          <a href="#">Home</a>
-          <a href="#">About Us</a>
-          <a href="#">Contact Us</a>
-          <a href="#">FAQs</a>
+          <a href="/">Home</a>
+          <a href="/about/about-us">About Us</a>
+          <a href="/about/contact-us">Contact Us</a>
           <a href="#">Shipping & Returns</a>
           <a href="#">Privacy Policy</a>
           <a href="#">Terms of Service</a>

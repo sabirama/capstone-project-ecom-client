@@ -63,7 +63,6 @@ const Register = () => {
 
   return (
     <Segment>
-      <button onClick={console.log(postData)}>test</button>
       <h1>Register</h1>
       <Form className="form register">
         <Form.Group widths="equal">

@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import { Segment } from "semantic-ui-react";
 
 const OrderDetails = (prop) => {
-  console.log(prop);
   return (
     <>
       {prop.order == undefined ? (
