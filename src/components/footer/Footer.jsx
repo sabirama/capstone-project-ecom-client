@@ -28,6 +28,14 @@ const Footer = () => {
           <a href="#">Privacy Policy</a>
           <a href="#">Terms of Service</a>
         </Container>
+
+        <Container className="footer-links-container newsletter flex-col my-1">
+          <p>Sign up for our Newsletter:</p>
+          <div className="flex">
+            <input type="email" placeholder="Enter your email" />
+            <button>Subscribe</button>
+          </div>
+        </Container>
       </Container>
       <Container className="container">
         <Container className="contact-info flex-col my-1">
@@ -37,12 +45,6 @@ const Footer = () => {
           <p>
             Email: <a href="mailto:info@abcbookstore.com">info@abcbookstore.com</a>
           </p>
-        </Container>
-
-        <Container className="footer-links-container newsletter flex-col my-1">
-          <p>Sign up for our Newsletter:</p>
-          <input type="email" placeholder="Enter your email" />
-          <button>Subscribe</button>
         </Container>
       </Container>
     </Segment>

@@ -20,16 +20,12 @@ const BookDisplay = (prop) => {
   }
 
   useEffect(() => {
-    try {
-      setBook(prop.book);
-      if (prop.book.book_image != null) {
-        setPath(import.meta.env.VITE_SOURCE_URL + prop.book.book_image[0].image_path);
-      }
-      if (prop.book.book_details.genres != null) {
-        setGenres(prop.book.book_details.genres[0].name);
-      }
-    } catch (e) {
-      console.log(e);
+    setBook(prop.book);
+    if (prop.book.book_image[0] != null) {
+      setPath(import.meta.env.VITE_SOURCE_URL + prop.book.book_image[0].image_path);
+    }
+    if (prop.book.book_details.genres[0] != null) {
+      setGenres(prop.book.book_details.genres[0].name);
     }
   }, [prop.book]);
 

@@ -121,3 +121,14 @@ label.star-label:before {
 input.star-radio:checked + label.star-label:before {
   color: gold;
 }
+
+@media screen and (min-width: 768px) {
+  .book-link {
+    height: 400px;
+    display: flex;
+  }
+
+  .image-display-container {
+    width: 100%;
+  }
+}

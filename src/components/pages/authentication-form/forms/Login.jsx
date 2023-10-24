@@ -21,13 +21,12 @@ const LogIn = () => {
 
   async function logIn() {
     await post();
-
     setIsLoggingIn(true);
+    setAuthorize(false);
   }
 
   async function post() {
     await Post("login", postData, setGetData);
-    setAuthorize(false);
   }
 
   useEffect(() => {
