@@ -21,9 +21,7 @@ const IndividualBook = () => {
   const bookId = sessionStorage.getItem("current_book");
 
   async function getReviews() {
-    console.log("getting reviews");
     await Get(`book-reviews/book?book_id=${bookId}`).then((e) => {
-      console.log("revv");
       setReviews(e);
     });
     setLoading(false);
