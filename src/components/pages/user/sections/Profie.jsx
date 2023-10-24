@@ -20,18 +20,6 @@ const Profie = () => {
     }
   }
 
-  function editOption() {
-    setEdit(!edit);
-  }
-
-  function changeProfileImage() {
-    setEditImage(!editImage);
-  }
-
-  function changePaymentType(e) {
-    setPaymentType(e.target.value);
-  }
-
   function toggleDropDown() {
     if (dropDown == "close") {
       setDropDown("open");
@@ -57,14 +45,9 @@ const Profie = () => {
                 <Icon name="man" className="bottom-0 right-0 absolute" />
               </Segment>
               {editImage == true ? (
-                <>
-                  <input type="file" />
-                  <button onClick={changeProfileImage} className="mt-1">
-                    Submit Image
-                  </button>
-                </>
+                <></>
               ) : (
-                <button className="change-img-btn" onClick={changeProfileImage}>
+                <button className="change-img-btn" onClick={setEditImage(!editImage)}>
                   Change Profile Image
                 </button>
               )}
@@ -87,7 +70,7 @@ const Profie = () => {
         </Segment>
 
         <Segment>
-          <button onClick={editOption}>Edit Settings</button>
+          <button onClick={() => setEdit(!edit)}>Edit Settings</button>
           <Segment>
             <div className="flex place-center">
               <h4 className="m-0">Prefered Payment Type: </h4>
@@ -108,7 +91,7 @@ const Profie = () => {
                     className="mx-1 payment-button"
                     value="Cash on Delivery"
                     name={1}
-                    onClick={changePaymentType}
+                    onClick={(e) => setPaymentType(e.target.value)}
                   />
 
                   <input
@@ -116,14 +99,14 @@ const Profie = () => {
                     className="mx-1 payment-button"
                     value="Credit Card"
                     name={2}
-                    onClick={changePaymentType}
+                    onClick={(e) => setPaymentType(e.target.value)}
                   />
                   <input
                     type="button"
                     className="mx-1 payment-button"
                     value="G-cash"
                     name={3}
-                    onClick={changePaymentType}
+                    onClick={(e) => setPaymentType(e.target.value)}
                   />
                 </ul>
               </div>
