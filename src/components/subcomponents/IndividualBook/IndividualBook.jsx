@@ -21,8 +21,10 @@ const IndividualBook = () => {
   const bookId = sessionStorage.getItem("current_book");
 
   async function getReviews() {
+    setChangeDisplay(true);
     const data = await Get(`book-reviews/book?book_id=${bookId}`);
     setReviews(data.book_reviews);
+    setChangeDisplay(false);
   }
 
   function toggleBuy() {
@@ -35,28 +37,23 @@ const IndividualBook = () => {
   }
 
   useEffect(() => {
-    setTitle(sessionStorage.getItem("current_title"));
-    setAuthor(sessionStorage.getItem("current_author"));
-    setDetail(sessionStorage.getItem("current_detail"));
-    setPrice(sessionStorage.getItem("current_price"));
-    setPath(sessionStorage.getItem("current_image"));
-    setGenre(sessionStorage.getItem("current_genre"));
     getReviews();
-    window.addEventListener("displayBook", function () {
-      setChangeDisplay(true);
+    window.addEventListener("displayBook", async function () {
+      setTitle(sessionStorage.getItem("current_title"));
+      setAuthor(sessionStorage.getItem("current_author"));
+      setDetail(sessionStorage.getItem("current_detail"));
+      setPrice(sessionStorage.getItem("current_price"));
+      setPath(sessionStorage.getItem("current_image"));
+      setGenre(sessionStorage.getItem("current_genre"));
     });
     window.addEventListener("addedBookReview", function () {
-      setChangeDisplay(true);
+      getReviews();
     });
     return () => {
       window.removeEventListener("dispayBook", function () {});
       window.removeEventListener("addedBookReview", function () {});
     };
-  }, [changeDisplay]);
-
-  useEffect(() => {
-    setChangeDisplay(false);
-  }, [reviews]);
+  }, []);
 
   return (
     <>
@@ -100,14 +97,12 @@ const IndividualBook = () => {
                     <h2>Reviews</h2>
                   </Segment>
 
-                  {reviews.map((bookreviews) => {
-                    return bookreviews.book_reviews.map((review, index) => {
-                      return review != null ? (
-                        <div key={index} className="container py-1">
-                          <BookReviewSection review={review} user={bookreviews.user} />
-                        </div>
-                      ) : null;
-                    });
+                  {reviews.map((review, index) => {
+                    return (
+                      <div key={index} className="container py-1">
+                        <BookReviewSection review={review} />
+                      </div>
+                    );
                   })}
                 </>
               ) : (
