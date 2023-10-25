@@ -12,9 +12,16 @@
   margin: 1rem;
 }
 
-.profile-pic {
+.profile-pic-container {
+  position: relative;
   width: 100px;
   height: 180px;
+}
+
+.profile-pic {
+  position: absolute;
+  width: 100px;
+  height: 100%;
 }
 
 input[type="file"] {
@@ -38,4 +45,9 @@ input[type="file"] {
 .payment-button {
   width: 150px;
   margin: 1rem;
+}
+
+.notif-button {
+  background-color: var(--secondary);
+  color: white;
 }

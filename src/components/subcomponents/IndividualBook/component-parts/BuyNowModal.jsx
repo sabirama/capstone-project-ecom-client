@@ -7,36 +7,44 @@ const BuyNowModal = (prop) => {
   const [bookPrice, setBookPrice] = useState(0);
   const navigate = useNavigate();
 
-  function getTotalPrice(e) {
-    setBookPrice(e.target.value);
+  function buyNow() {
+    try {
+      navigate("/");
+    } catch (error) {
+      //
+    }
   }
 
-  function changePaymentType(e) {
-    setPaymentType(e.target.value);
-  }
-  function toHome() {
-    navigate("/");
-  }
   return (
     <div className="modal flex place-center">
       <Segment className="container place-center">
         <div className="container flex-col modal-box">
           <Segment>
-            <h4>Payment Options</h4>
+            <h4>BUY NOW</h4>
           </Segment>
           <Segment>
             <h4>Payment Options</h4>
             <div>
               <span className="mx-1">
-                <input type="radio" value={"COD"} name="payment-type" onClick={changePaymentType} />
+                <input type="radio" value={"COD"} name="payment-type" onClick={(e) => setPaymentType(e.target.value)} />
                 <small>Cash on Delivery</small>
               </span>
               <span className="mx-1">
-                <input type="radio" value={"Credit Card"} name="payment-type" onClick={changePaymentType} />
+                <input
+                  type="radio"
+                  value={"Credit Card"}
+                  name="payment-type"
+                  onClick={(e) => setPaymentType(e.target.value)}
+                />
                 <small>Credit Card</small>
               </span>
               <span className="mx-1">
-                <input type="radio" value={"G-Cash"} name="payment-type" onClick={changePaymentType} />
+                <input
+                  type="radio"
+                  value={"G-Cash"}
+                  name="payment-type"
+                  onClick={(e) => setPaymentType(e.target.value)}
+                />
                 <small>G-Cash</small>
               </span>
             </div>
@@ -44,7 +52,7 @@ const BuyNowModal = (prop) => {
             {paymentType == "Credit Card" ? (
               <>
                 <Segment>
-                  <div className="container flex-col">
+                  <div className="container flex-col place-center">
                     <input type={"number"} placeholder="card Number" maxLength={20} className="card-input" />
                     <input type={"letter"} placeholder="Card Holder Namme" className="card-input" />
                     <div>
@@ -61,7 +69,7 @@ const BuyNowModal = (prop) => {
             )}
             {paymentType == "COD" ? (
               <>
-                <Segment className="container">
+                <Segment className="container place-center">
                   <div className="width-100 flex-col">
                     <input type="text" placeholder="Full Name" className="cod-input" />
                     <textarea placeholder="Other Details" className="cod-input" />
@@ -79,7 +87,7 @@ const BuyNowModal = (prop) => {
 
             {paymentType == "G-Cash" ? (
               <>
-                <Segment className="container">
+                <Segment className="container place-center">
                   <div className="container flex-col mx-1">
                     <input type="text" placeholder="G-Cash Number" className="cod-input" />
                     <textarea placeholder="Other Details" className="cod-input" />
@@ -95,16 +103,18 @@ const BuyNowModal = (prop) => {
             <div className="my-1">
               <h5>Quantity</h5>
             </div>
-            <div className="flex">
-              <input type="number" value={bookPrice} onChange={getTotalPrice} />
+            <div className="flex place-center">
+              <input type="number" value={bookPrice} onChange={(e) => setBookPrice(e.target.value)} className="short" />
               <p className="mx-1">Total: {Number(sessionStorage.getItem("current_price")) * bookPrice} Php</p>
             </div>
           </Segment>
           <Segment className="container flex-end">
-            <button to="/" className="mx-1" onClick={toHome}>
+            <button to="/" className="mx-1 proceed-button" onClick={buyNow}>
               PROCEED
             </button>
-            <button onClick={prop.setter}>CANCEL</button>
+            <button onClick={prop.setter} className="cancel-button">
+              CANCEL
+            </button>
           </Segment>
         </div>
       </Segment>

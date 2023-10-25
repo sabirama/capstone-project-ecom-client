@@ -18,4 +18,6 @@
 }
 .newsletter button {
   max-width: 100px;
+  background: none;
+  color: var(--primary);
 }

@@ -28,7 +28,8 @@
 }
 
 .hero-button {
-  background-color: var(--accent);
+  background-color: var(--dark);
+  color: var(--light);
   padding: 1rem;
   border-radius: 0.5rem;
 }

@@ -34,9 +34,9 @@ const MainPage = (props) => {
       {props.reviews.length == 0 ? (
         <img src="loader.gif" alt="" className="loader" />
       ) : (
-        <Segment className="container flex-col py-1 my-2">
+        <Segment className="container flex-col py-1 my-2 ">
           <h3>Customer Reviews</h3>
-          <div className="container flex-col">
+          <div className="container flex-col ">
             {props.reviews.map((review, index) => {
               return <OrderReviews key={index} review={review} />;
             })}

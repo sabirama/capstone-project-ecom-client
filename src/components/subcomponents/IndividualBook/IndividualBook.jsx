@@ -65,25 +65,30 @@ const IndividualBook = () => {
         {buyNow == false ? (
           <>
             <Segment className="p-1 container flex-col width-100">
-              <img src={path} alt="book cover" className="book-cover" />
-              <Container className="py-1 container flex">
-                <div className="width-100">
-                  <h1 className="text-center">{title}</h1>
-                  <p>Author: {author}</p>
-                </div>
-                <div className="container price place-center">
-                  <h3 className="width-100">{price} Php</h3>
-                </div>
+              <Container>
+                <img src={path} alt="book cover" className="book-cover" />
+                <Container className="py-1 container flex-col book-details">
+                  <div className="width-100">
+                    <h1 className="text-center">{title}</h1>
+                    <p>Author: {author}</p>
+                    <p>genre: {genre}</p>
+                  </div>
+                  <div className="container price place-center"></div>
+                  <div className="py-1">
+                    <h3>Details</h3>
+                    <p>{detail}</p>
+                  </div>
+                  <div>
+                    <h3 className="width-100">Price: {price} Php</h3>
+                  </div>
+                </Container>
               </Container>
-              <Segment className="py-1">
-                <h3>Details</h3>
-                <p>{detail}</p>
-                <p>genre: {genre}</p>
-              </Segment>
             </Segment>
             <Menu className="flex content-space-between">
               <Menu.Item>
-                <button onClick={toggleBuy}>BUY NOW</button>
+                <button onClick={toggleBuy} className="buy-button">
+                  BUY NOW
+                </button>
               </Menu.Item>
 
               <Menu.Item>
@@ -91,7 +96,7 @@ const IndividualBook = () => {
               </Menu.Item>
 
               <Segment className="container button-container">
-                <button className="button">Add to favorites</button>
+                <button className="button">Like</button>
               </Segment>
             </Menu>
             <Segment>

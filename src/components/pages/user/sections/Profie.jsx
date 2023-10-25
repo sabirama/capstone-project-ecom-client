@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
-import { Header, Icon, Segment } from "semantic-ui-react";
+import { Container, Header, Icon, Segment } from "semantic-ui-react";
 import { useNavigate } from "react-router-dom";
 import Get from "../../../lib/http/get";
+import Post from "../../../lib/http/post";
 
 const Profie = () => {
   const [user, setUser] = useState([]);
   const [edit, setEdit] = useState(true);
   const [editImage, setEditImage] = useState(false);
   const [dropDown, setDropDown] = useState("close");
+  const [notif, setNotif] = useState("turn on");
   const [paymentType, setPaymentType] = useState("");
   const navigate = useNavigate();
 
@@ -28,6 +30,19 @@ const Profie = () => {
     }
   }
 
+  function toggleNotif() {
+    if (notif == "turn on") {
+      setNotif("turn off");
+    }
+    if (notif == "turn off") {
+      setNotif("turn on");
+    }
+  }
+
+  async function imageUpload() {
+    await Post("images", { image_type: "user_image", associated_id: user.id, image: "" });
+  }
+
   useEffect(() => {
     getUser();
   }, []);
@@ -37,11 +52,13 @@ const Profie = () => {
   return (
     <>
       <Segment className="container flex-col">
-        <Header as="h2" icon className="user-card">
+        <Header as="h2" icon className="user-card ">
           <Segment className="container">
-            <div className="container flex-col usesr-icons px-1 py-0">
-              <Segment className="flex">
-                <div className="profile-pic">{user.image ? <img src="" /> : <Icon name="user" />}</div>
+            <div className="container flex-col usesr-icons px-1 py-0 ">
+              <Segment className="flex white-container">
+                <div className="profile-pic-container">
+                  {user.image ? <img src="" /> : <Icon name="user" className="profie=pic" />}
+                </div>
                 <Icon name="man" className="bottom-0 right-0 absolute" />
               </Segment>
               {editImage == true ? (
@@ -52,10 +69,11 @@ const Profie = () => {
                 </button>
               )}
             </div>
-            <Segment className="container flex-col text-right user-detail px-1 mt-0">
+            <Segment className="container flex-col text-right user-detail px-1 mt-0 white-container">
               <div className="container">
+                <h2>Name:</h2>
+                <h2 className="mp-0 px-1">{user.first_name}</h2>
                 <h2 className="m-0">{user.last_name}</h2>
-                <h2 className="mp-0 px-1">Name: {user.first_name}</h2>
               </div>
               <h2 className="mt-1 mb-1">Username: {user.username}</h2>
               <h2 className="mt-0 mb-1">Email: {user.email}</h2>
@@ -71,7 +89,7 @@ const Profie = () => {
 
         <Segment>
           <button onClick={() => setEdit(!edit)}>Edit Settings</button>
-          <Segment>
+          <Segment className="white-container">
             <div className="flex place-center">
               <h4 className="m-0">Prefered Payment Type: </h4>
               <h3 className="m-0 ml-1">{paymentType}</h3>
@@ -112,7 +130,7 @@ const Profie = () => {
               </div>
             </div>
           </Segment>
-          <Segment className="my-1 flex flex-col">
+          <Segment className="my-1 flex flex-col  white-container">
             <h3 className="content-center">Address</h3>
             <div>
               <input type="text" readOnly={edit} placeholder="street" className="mx-1 input" />
@@ -122,6 +140,31 @@ const Profie = () => {
             <div>
               <input type="button" readOnly={edit} value="Add Address" className="mx-1 input" />
             </div>
+          </Segment>
+        </Segment>
+
+        <Segment>
+          <h3>Notifications and Subscriptions</h3>
+
+          <Segment className="flex white-container">
+            <Container className="place-center">
+              <p className="px-1">Newsletter</p>
+              <button className="notif-button" onClick={toggleNotif}>
+                {notif}
+              </button>
+            </Container>
+            <Container className="place-center">
+              <p className="px-1">Email notifications</p>
+              <button className="notif-button" onClick={toggleNotif}>
+                {notif}
+              </button>
+            </Container>
+            <Container className="place-center ">
+              <p className="px-1">Phone notifications</p>
+              <button className="notif-button" onClick={toggleNotif}>
+                {notif}
+              </button>
+            </Container>
           </Segment>
         </Segment>
       </Segment>

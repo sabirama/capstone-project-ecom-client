@@ -43,7 +43,7 @@ const Footer = () => {
           <p>Address: 123 Main Street, Bookville</p>
           <p>Phone: (555) 123-4567</p>
           <p>
-            Email: <a href="mailto:info@abcbookstore.com">info@abcbookstore.com</a>
+            Email: <a href="mailto:info@readersshelf.com">info@readersshelf.com</a>
           </p>
         </Container>
       </Container>

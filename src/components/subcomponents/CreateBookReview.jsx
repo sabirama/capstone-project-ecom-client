@@ -57,7 +57,7 @@ const CreateBookReview = (prop) => {
             <input type="radio" id="star6" value={5} name="rating" onClick={createRate} className="star-radio" />
             <label htmlFor="star6" className="star-label"></label>
           </div>
-          <button onClick={postReview} className="button">
+          <button onClick={postReview} className="button post-review-button">
             Post Review
           </button>
         </div>

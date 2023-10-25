@@ -3,7 +3,7 @@ import { Segment } from "semantic-ui-react";
 /* eslint-disable react/prop-types */
 const OrderReviews = (props) => {
   return (
-    <Segment>
+    <Segment className="customer-reviews">
       <div>
         <h5>Customer {props.review.user_id}</h5>
       </div>

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Grid } from "semantic-ui-react";
+import { Grid, Container } from "semantic-ui-react";
 
 const BookDisplay = (prop) => {
   const [book, setBook] = useState([]);
@@ -23,6 +23,8 @@ const BookDisplay = (prop) => {
     setBook(prop.book);
     if (prop.book.book_image[0] != null) {
       setPath(import.meta.env.VITE_SOURCE_URL + prop.book.book_image[0].image_path);
+    } else {
+      setPath("/placeholder-book-image.svg");
     }
     if (prop.book.book_details.genres[0] != null) {
       setGenres(prop.book.book_details.genres[0].name);
@@ -36,13 +38,13 @@ const BookDisplay = (prop) => {
           <Grid.Column className="container book">
             <Link to={`id/${book.id}`} className="container book-link width-90 height-90" onClick={onClickHandler}>
               <div className="image-display-container">
-                <img src={path ? path : "/placeholder-book-image.svg"} alt="book image" className="book-image" />
+                <img src={path} alt="book image" className="book-image" />
               </div>
-              <div>
+              <Container>
                 <h3 className="m-0 image-text-container">{book.title}</h3>
                 <p>for: {book.price} Php</p>
                 <p>genre: {genres}</p>
-              </div>
+              </Container>
             </Link>
           </Grid.Column>
         </>
